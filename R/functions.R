@@ -60,7 +60,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
             warning('Data contains NAs, we strongly advise setting "interpolate = FALSE" for rawTimeSeries containing large continuous chunks of NAs')
         }
         warning(sprintf('Vasseur and Yodzis (2004) [Ecology, doi: 10.1890/02-3122] recommend time series with 128 months or approximately 10 years, the input data contains %s months', length(unique(format(datesVector, format = '%B%Y')))))
-        months              <-  format(sst$datesVector, format = '%B')
+        months              <-  format(datesVector, format = '%B')
         startAndEndNotSame  <-  months[1] != months[length(months)]
         if (startAndEndNotSame) {
             warning(sprintf('Time series starts and ends at different times of the year. Starting month is %s and ending month is %s', months[1], months[length(months)]))
