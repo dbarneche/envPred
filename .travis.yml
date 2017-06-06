@@ -11,6 +11,7 @@ before_install:
   - chmod 755 ./travis-tool/travis_timeout.sh
   - sudo apt-get install libssl-dev
   - sudo apt-get install libcurl4-openssl-dev
+  - sudo apt-get install libhdf5
   - sudo apt-get install libhdf5-dev
   - sudo apt-get install libudunits2-0
   - sudo apt-get install libudunits2-dev
