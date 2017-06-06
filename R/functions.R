@@ -5,32 +5,45 @@
 #' a raw environmental time series.
 #' @param datesVector An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.
 #' @param delta Time interval (any unit) of \code{rawTimeSeries}.
-#' @param isUneven Is \code{rawTimeSeries} even or unevenly distributed in time? Default is FALSE.
+#' @param isUneven Is \code{rawTimeSeries} even or unevenly distributed in time? Default is \code{\link[base]{FALSE}}.
 #' @param interpolate Should a linear interpolation be applied to missing values in 
-#' \code{rawTimeSeries}? Irrelevant method if \code{isUneven} is FALSE. Default is FALSE.
-#' @param checkPlots Should inspection plots be triggered? Default is FALSE. Not recommended 
+#' \code{rawTimeSeries}? Irrelevant method if \code{isUneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.
+#' @param checkPlots Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}. Not recommended 
 #' if applying this task to multiple time series at once.
+#' @param showWarnings Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
+#' Strongly recommended for first time users.
 #' @param seasonalityMethod A method for estimating seasonality. Takes 3 possible 
 #' values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'LombScargle'} for unevenly distributed ones.
-#' @details This function currently allows for monthly seasonality calculation only. 
-#' This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess 2015} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
+#' @details This function currently allows for monthly-based seasonality calculation only. 
+#' This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
+#' 
+#' We advise caution for datasets in which \code{rawTimeSeries} contains NAs. Particularly, 
+#' we strongly advise setting \code{interpolate = FALSE} for \code{rawTimeSeries} containing large 
+#' continuous chunks of NAs because the linear interpolation might introduce substantial bias.
+#'
+#' \href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
+#' 
+#' We also strongly recommend the user to first make sure that \code{datesVector} starts and
+#' ends at least at the same month of the year to avoid bias.
 #' @return A \code{\link[base]{data.frame}} with environmental predictability components.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}.
 #' @examples
 #' library(envPred)
 #' data(sst)
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
+#' # all results return important warning messages of which the user should be aware.
+#' # after double-checking that the data falls within the recommended specs, set showWarnings = FALSE
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
 #' data(npp)
-#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
-#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' @export
-envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = c('absolute', 'unbounded', 'bounded'), noiseMethod = c('spectrum', 'LombScargle')) {
+envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod) {
     if (missing(seasonalityMethod)) {
         seasonalityMethod  <-  'bounded'
     }
@@ -41,6 +54,17 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
     # Calculate predicted mean linear trend and residuals (interpolate NAs linearly)
     if (any(is.na(rawTimeSeries)) && interpolate) {
         rawTimeSeries  <-  imputeTS::na.interpolation(rawTimeSeries, option = 'linear')
+    }
+    if (showWarnings) {
+        if (any(is.na(rawTimeSeries))) {
+            warning('Data contains NAs, we strongly advise setting "interpolate = FALSE" for rawTimeSeries containing large continuous chunks of NAs')
+        }
+        warning(sprintf('Vasseur and Yodzis (2004) [Ecology, doi: 10.1890/02-3122] recommend time series with 128 months or approximately 10 years, the input data contains %s months', length(unique(format(datesVector, format = '%B%Y')))))
+        months              <-  format(sst$datesVector, format = '%B')
+        startAndEndNotSame  <-  months[1] != months[length(months)]
+        if (startAndEndNotSame) {
+            warning(sprintf('Time series starts and ends at different times of the year. Starting month is %s and ending month is %s', months[1], months[length(months)]))
+        }
     }
     
     detrended      <-  linearDetrending(rawTimeSeries, datesVector)
@@ -92,18 +116,18 @@ linearDetrending  <-  function (rawTimeSeries, datesVector) {
 #' @param spectrumObject A \code{\link[base]{data.frame}} containing a vector 
 #' of frequencies/periods scanned, and a vector containing the normalised power
 #' corresponding to scanned frequencies/periods.
-#' @param plot Should inspection plots be triggered?
+#' @param plot Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}.
 #' @return A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
-#' @details Calculates slope of ln(normalised power)~ln(frequencies).
-#' @author Diego Barneche.
+#' @details Calculates slope of log10(normalised power)~log10(frequencies).
+#' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 extractSpectrumSlope  <-  function (spectrumObject, plot = FALSE) {
-    model  <-  stats::lm(log(spectrumObject$spec) ~ log(spectrumObject$freq))
+    model  <-  stats::lm(log10(spectrumObject$spec) ~ log10(spectrumObject$freq))
     if (plot) {
         dev.new()
         plot(spec ~ freq, data = spectrumObject, type = 'l', xlab = 'Frequency', ylab = 'Spectral power density', col = 'tomato', las = 1)
         dev.new()
-        plot(log(spec) ~ log(freq), data = spectrumObject, type = 'l', xlab = 'ln Frequency', ylab = 'ln Spectral power density', col = 'tomato', las = 1)
+        plot(log10(spec) ~ log10(freq), data = spectrumObject, type = 'l', xlab = 'log10 Frequency', ylab = 'log10 Spectral power density', col = 'tomato', las = 1)
     }
     as.numeric(abs(coef(model)[2])) # Extract the linear slope coefficient, make it positive
 }
@@ -117,7 +141,7 @@ extractSpectrumSlope  <-  function (spectrumObject, plot = FALSE) {
 #' @return A \code{\link[base]{data.frame}} containing a vector 
 #' of frequencies/periods scanned, and a vector containing the normalised power
 #' corresponding to scanned frequencies/periods.
-#' @author Diego Barneche.
+#' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 prepareLombScargleOutput  <-  function (residualTimeSeries, ...) {
     LombScargleObj  <-  lomb::lsp(residualTimeSeries, plot = FALSE, ...)
@@ -140,7 +164,7 @@ prepareLombScargleOutput  <-  function (residualTimeSeries, ...) {
 #' ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries};
 #' if \code{'bounded'}, it corresponds to the sample variance of \code{interpolatedSeasons}
 #' relative to the total summed variances of both \code{interpolatedSeasons} and \code{residualTimeSeries}.
-#' @author Diego Barneche.
+#' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{monthlyBinning}}, \code{\link[envPred]{envPredictability}}.
 envSeasonality  <-  function (interpolatedSeasons, residualTimeSeries, seasonalityMethod = c('absolute', 'unbounded', 'bounded')) {
     varPredict    <-  var(interpolatedSeasons, na.rm = TRUE)
@@ -176,7 +200,7 @@ envSeasonality  <-  function (interpolatedSeasons, residualTimeSeries, seasonali
 #' @return A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
 #' @details This function calculates beta slope (assuming 1/f noise family) on the
 #' residual time series using function \code{\link[envPred]{extractSpectrumSlope}}.
-#' @author Diego Barneche.
+#' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{monthlyBinning}}, \code{\link[envPred]{envPredictability}}, \code{\link[envPred]{extractSpectrumSlope}}.
 envNoise  <-  function (residualTimeSeries, predictor, checkPlots, noiseMethod = c('spectrum', 'LombScargle')) {
     switch (match.arg(noiseMethod),

@@ -34,5 +34,5 @@ residual time series using function \code{\link[envPred]{extractSpectrumSlope}}.
 \code{\link[envPred]{monthlyBinning}}, \code{\link[envPred]{envPredictability}}, \code{\link[envPred]{extractSpectrumSlope}}.
 }
 \author{
-Diego Barneche.
+Diego Barneche and Scott Burgess.
 }

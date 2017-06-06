@@ -5,9 +5,8 @@
 \title{Calculates environmental predictability components}
 \usage{
 envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
-  interpolate = FALSE, checkPlots = FALSE,
-  seasonalityMethod = c("absolute", "unbounded", "bounded"),
-  noiseMethod = c("spectrum", "LombScargle"))
+  interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE,
+  seasonalityMethod = "bounded", noiseMethod)
 }
 \arguments{
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
@@ -17,13 +16,16 @@ a raw environmental time series.}
 
 \item{delta}{Time interval (any unit) of \code{rawTimeSeries}.}
 
-\item{isUneven}{Is \code{rawTimeSeries} even or unevenly distributed in time? Default is FALSE.}
+\item{isUneven}{Is \code{rawTimeSeries} even or unevenly distributed in time? Default is \code{\link[base]{FALSE}}.}
 
 \item{interpolate}{Should a linear interpolation be applied to missing values in 
-\code{rawTimeSeries}? Irrelevant method if \code{isUneven} is FALSE. Default is FALSE.}
+\code{rawTimeSeries}? Irrelevant method if \code{isUneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.}
 
-\item{checkPlots}{Should inspection plots be triggered? Default is FALSE. Not recommended 
+\item{checkPlots}{Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}. Not recommended 
 if applying this task to multiple time series at once.}
+
+\item{showWarnings}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
+Strongly recommended for first time users.}
 
 \item{seasonalityMethod}{A method for estimating seasonality. Takes 3 possible 
 values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).}
@@ -39,18 +41,29 @@ A \code{\link[base]{data.frame}} with environmental predictability components.
 Environmental predictability components
 }
 \details{
-This function currently allows for monthly seasonality calculation only. 
-This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess 2015} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
+This function currently allows for monthly-based seasonality calculation only. 
+This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
+
+We advise caution for datasets in which \code{rawTimeSeries} contains NAs. Particularly, 
+we strongly advise setting \code{interpolate = FALSE} for \code{rawTimeSeries} containing large 
+continuous chunks of NAs because the linear interpolation might introduce substantial bias.
+
+\href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
+
+We also strongly recommend the user to first make sure that \code{datesVector} starts and
+ends at least at the same month of the year to avoid bias.
 }
 \examples{
 library(envPred)
 data(sst)
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
+# all results return important warning messages of which the user should be aware.
+# after double-checking that the data falls within the recommended specs, set showWarnings = FALSE
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
 data(npp)
-envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
-envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 }
 \seealso{
 \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}.

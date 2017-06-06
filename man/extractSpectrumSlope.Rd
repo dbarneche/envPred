@@ -11,7 +11,7 @@ extractSpectrumSlope(spectrumObject, plot = FALSE)
 of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.}
 
-\item{plot}{Should inspection plots be triggered?}
+\item{plot}{Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}.}
 }
 \value{
 A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
@@ -20,11 +20,11 @@ A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
 Adapt Lomb-Scargle Periodogram
 }
 \details{
-Calculates slope of ln(normalised power)~ln(frequencies).
+Calculates slope of log10(normalised power)~log10(frequencies).
 }
 \seealso{
 \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 }
 \author{
-Diego Barneche.
+Diego Barneche and Scott Burgess.
 }

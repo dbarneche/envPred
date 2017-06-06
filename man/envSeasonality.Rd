@@ -35,5 +35,5 @@ relative to the total summed variances of both \code{interpolatedSeasons} and \c
 \code{\link[envPred]{monthlyBinning}}, \code{\link[envPred]{envPredictability}}.
 }
 \author{
-Diego Barneche.
+Diego Barneche and Scott Burgess.
 }

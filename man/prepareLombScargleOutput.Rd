@@ -24,5 +24,5 @@ Adapt Lomb-Scargle Periodogram
 \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 }
 \author{
-Diego Barneche.
+Diego Barneche and Scott Burgess.
 }

@@ -8,11 +8,12 @@ Authors@R: person("Diego", "Barneche", , "diego.barneche@monash.edu", c("aut", "
 URL: https://github.com/dbarneche/envPred
 BugReports: https://github.com/dbarneche/envPred/issues
 Description: The package provides calculations to multiple components of environmental predictability.
-Depends: 
+Depends:
 	R (>= 3.3.2)
 LazyData: true
-Imports: 
+Imports:
 	lomb,
 	noaaErddap,
 	imputeTS
 RoxygenNote: 6.0.1
+Suggests: testthat
