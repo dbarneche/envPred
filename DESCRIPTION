@@ -1,0 +1,18 @@
+Package: envPred
+Title: Calculate environmental predictability for even an uneven time series data
+Year: 2017
+Version: 0.0.0.1000
+License: GPL-2
+Encoding: UTF-8
+Authors@R: person("Diego", "Barneche", , "diego.barneche@monash.edu", c("aut", "cre"))
+URL: https://github.com/dbarneche/envPred
+BugReports: https://github.com/dbarneche/envPred/issues
+Description: The package provides calculations to multiple components of environmental predictability.
+Depends: 
+	R (>= 3.3.2)
+LazyData: true
+Imports: 
+	lomb,
+	noaaErddap,
+	imputeTS
+RoxygenNote: 6.0.1

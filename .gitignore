@@ -1,0 +1,33 @@
+# R files
+.Rproj.user
+*.R*istory*
+.RData
+.httr-oauth
+
+# OS useless
+*.DS_Store
+*.DS_Store?
+
+# RStudio files
+.Rproj.user/
+
+# General extensions
+*~
+*.pdf
+*.doc*
+*.xls*
+
+# package development
+checkPackage.R
+envPred.Rcheck/
+envPred*tar.gz
+inst/doc
+inst/web
+vignettes/
+!vignettes/envPred.Rmd
+vignettes/*.html
+vignettes/*.pdf
+
+# Personal
+TODO.md
+tmp*
