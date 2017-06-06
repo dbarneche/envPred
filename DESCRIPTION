@@ -4,7 +4,10 @@ Year: 2017
 Version: 0.0.0.1000
 License: GPL-2
 Encoding: UTF-8
-Authors@R: person("Diego", "Barneche", , "diego.barneche@monash.edu", c("aut", "cre"))
+Authors@R: c(
+	person("Diego", "Barneche", , "diego.barneche@monash.edu", c("aut", "cre")),
+    person("Scott", "Burgess", , "sburgess@bio.fsu.edu", "aut")
+	)
 URL: https://github.com/dbarneche/envPred
 BugReports: https://github.com/dbarneche/envPred/issues
 Description: The package provides calculations to multiple components of environmental predictability.
@@ -15,5 +18,9 @@ Imports:
 	lomb,
 	noaaErddap,
 	imputeTS
+Suggests:
+	testthat
+Remotes:
+    dbarneche/noaaErddap
 RoxygenNote: 6.0.1
 Suggests: testthat
