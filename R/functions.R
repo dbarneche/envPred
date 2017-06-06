@@ -3,7 +3,8 @@
 #' @title Calculates environmental predictability components
 #' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
 #' a raw environmental time series.
-#' @param datesVector An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.
+#' @param datesVector An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+#' (must be in progressive chronological order).
 #' @param delta Time interval (any unit) of \code{rawTimeSeries}.
 #' @param isUneven Is \code{rawTimeSeries} even or unevenly distributed in time? Default is \code{\link[base]{FALSE}}.
 #' @param interpolate Should a linear interpolation be applied to missing values in 
@@ -47,11 +48,9 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
     if (missing(seasonalityMethod)) {
         seasonalityMethod  <-  'bounded'
     }
-    
     if (isUneven && noiseMethod == 'spectrum') {
         stop('Time series is uneven, please use noise method LombScargle')
     }
-    # Calculate predicted mean linear trend and residuals (interpolate NAs linearly)
     if (any(is.na(rawTimeSeries)) && interpolate) {
         rawTimeSeries  <-  imputeTS::na.interpolation(rawTimeSeries, option = 'linear')
     }
@@ -96,7 +95,8 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
 #' @title Linear detrending of time series
 #' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
 #' a raw environmental time series.
-#' @param datesVector An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.
+#' @param datesVector An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
+#' (must be in progressive chronological order).
 #' @return A \code{\link[base]{list}} containing a \code{\link[base]{numeric}} vector 
 #' of the time (in days) for each observation in \code{rawTimeSeries} starting at day 0, 
 #' and a \code{\link[base]{numeric}} vector containing the residual variation of \code{rawTimeSeries}
@@ -223,7 +223,8 @@ envNoise  <-  function (residualTimeSeries, predictor, checkPlots, noiseMethod =
 #' @title Compute the seasonal (monthly) components of time series 
 #' @param resids A \code{\link[base]{numeric}} vector containing the residual 
 #' variation of a raw time series after removing the linear trend.
-#' @param datesVec An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.
+#' @param datesVec An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
+#' (must be in progressive chronological order).
 #' @return A \code{\link[base]{list}} containing the a \code{\link[base]{numeric}} 
 #' vector containing predicted (interpolated) detrended residuals (\code{'interpolatedSeasons'}), and
 #' a \code{\link[base]{numeric}} vector containing unpredicted detrended residuals 

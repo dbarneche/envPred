@@ -10,7 +10,8 @@ linearDetrending(rawTimeSeries, datesVector)
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
 a raw environmental time series.}
 
-\item{datesVector}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.}
+\item{datesVector}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
+(must be in progressive chronological order).}
 }
 \value{
 A \code{\link[base]{list}} containing a \code{\link[base]{numeric}} vector 

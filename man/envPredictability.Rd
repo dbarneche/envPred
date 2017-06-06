@@ -12,7 +12,8 @@ envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
 a raw environmental time series.}
 
-\item{datesVector}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.}
+\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+(must be in progressive chronological order).}
 
 \item{delta}{Time interval (any unit) of \code{rawTimeSeries}.}
 

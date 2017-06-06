@@ -10,7 +10,8 @@ monthlyBinning(resids, datesVec)
 \item{resids}{A \code{\link[base]{numeric}} vector containing the residual 
 variation of a raw time series after removing the linear trend.}
 
-\item{datesVec}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.}
+\item{datesVec}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
+(must be in progressive chronological order).}
 }
 \value{
 A \code{\link[base]{list}} containing the a \code{\link[base]{numeric}} 
