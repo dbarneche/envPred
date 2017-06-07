@@ -51,8 +51,8 @@ continuous chunks of NAs because the linear interpolation might introduce substa
 
 \href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
 
-We also strongly recommend the user to first make sure that \code{datesVector} starts and
-ends at least at the same month of the year to avoid bias.
+Also note that if \code{datesVector} starts and ends in different month of the year, 
+some monthly means are estimated with relatively less precision.
 }
 \examples{
 library(envPred)

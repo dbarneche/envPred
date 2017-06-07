@@ -27,8 +27,8 @@
 #'
 #' \href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
 #' 
-#' We also strongly recommend the user to first make sure that \code{datesVector} starts and
-#' ends at least at the same month of the year to avoid bias.
+#' Also note that if \code{datesVector} starts and ends in different month of the year, 
+#' some monthly means are estimated with relatively less precision.
 #' @return A \code{\link[base]{data.frame}} with environmental predictability components.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}.
@@ -45,6 +45,9 @@
 #' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' @export
 envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod) {
+    seriesLength   <-  length(rawTimeSeries)
+    nOfNAs         <-  sum(is.na(rawTimeSeries))
+
     if (missing(seasonalityMethod)) {
         seasonalityMethod  <-  'bounded'
     }
@@ -81,7 +84,14 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         lines(datesVector, detrendedVecs$interpolatedSeasons, col = 'tomato', lwd = 1)
     }
 
-    data.frame(frequency            =  2 / (length(datesVector) * delta),
+
+    data.frame(seriesLength         =  seriesLength,
+               nOfNAs               =  nOfNAs,
+               proportionNAs        =  nOfNAs / seriesLength,
+               nOfYears             =  length(unique(format(datesVector, format = '%Y'))),
+               nOfMonths            =  length(unique(format(datesVector, format = '%B'))),
+               nOfDays              =  length(unique(datesVector)),
+               frequency            =  2 / (length(datesVector) * delta),
                nyquistFrequency     =  1 / (2 * delta),
                predictedVariance    =  seasonalityList$predictedVariance,
                unpredictedVariance  =  seasonalityList$unpredictedVariance,
