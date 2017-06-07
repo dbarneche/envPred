@@ -18,6 +18,7 @@ before_install:
   - sudo apt-get install libhdf5-dev
   - sudo apt-get install libudunits2-0
   - sudo apt-get install libudunits2-dev
+  - export LD_LIBRARY_PATH=/usr/local/lib
   - wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.tar.gz
   - tar xvzf netcdf-4.4.1.tar.gz
   - cd netcdf-4.4.1
