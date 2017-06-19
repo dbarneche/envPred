@@ -2,7 +2,11 @@
 % Please edit documentation in R/functions.R
 \name{colwell74}
 \alias{colwell74}
-\title{Predictability from Colwell (1974)}
+\title{Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
+for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
+periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
+cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
+matrix with months as columns, and states as rows. See Colwell (1974) for more information.}
 \usage{
 colwell74(rawTimeSeries, datesVector, nStates = 11)
 }
@@ -20,6 +24,11 @@ up into discrete states. Default (arbitrary) is 11. See Details.}
 \value{
 A \code{\link[base]{data.frame}} with three environmental predictability components:
 constancy (\code{Colwell_C}), contingency (\code{Colwell_M}) and predictability (\code{Colwell_P}).
+Constancy (C) measures the extent to which the environment is the same for all months in all years. 
+Contingency (M) measures the extent to which the environmental differences between months are the same 
+in all years. Predictability (P) is the sum of Constancy (C) and Contingency (M). Maximum predictability 
+can be attained as a consequence of either complete constancy, complete contingency, or a combination 
+of constancy and contingency.
 }
 \description{
 Predictability from Colwell (1974)
