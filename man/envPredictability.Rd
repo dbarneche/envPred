@@ -6,7 +6,7 @@
 \usage{
 envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
   interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE,
-  seasonalityMethod = "bounded", noiseMethod)
+  seasonalityMethod = "bounded", noiseMethod, ...)
 }
 \arguments{
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
@@ -34,6 +34,8 @@ values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).}
 \item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible 
 values: \code{'spectrum'} for evenly distributed time series or 
 \code{'LombScargle'} for unevenly distributed ones.}
+
+\item{...}{Additional arguments to \code{\link[envPred]{colwell74}}.}
 }
 \value{
 A \code{\link[base]{data.frame}} with environmental predictability components.
@@ -67,7 +69,7 @@ envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE
 envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 }
 \seealso{
-\code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}.
+\code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}, \code{\link[envPred]{colwell74}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

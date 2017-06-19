@@ -18,6 +18,7 @@
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'LombScargle'} for unevenly distributed ones.
+#' @param ... Additional arguments to \code{\link[envPred]{colwell74}}.
 #' @details This function currently allows for monthly-based seasonality calculation only. 
 #' This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 #' 
@@ -31,7 +32,7 @@
 #' some monthly means are estimated with relatively less precision.
 #' @return A \code{\link[base]{data.frame}} with environmental predictability components.
 #' @author Diego Barneche and Scott Burgess.
-#' @seealso \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}.
+#' @seealso \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}, \code{\link[envPred]{colwell74}}.
 #' @examples
 #' library(envPred)
 #' data(sst)
@@ -44,7 +45,7 @@
 #' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' @export
-envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod) {
+envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod, ...) {
     seriesLength   <-  length(rawTimeSeries)
     nOfNAs         <-  sum(is.na(rawTimeSeries))
 
@@ -72,6 +73,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         }
     }
     
+    colwellStats   <-  colwell74(rawTimeSeries, datesVector, ...)
     detrended      <-  linearDetrending(rawTimeSeries, datesVector)
     detrendedVecs  <-  monthlyBinning(detrended$resids, datesVector)
 
@@ -84,20 +86,66 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         lines(datesVector, detrendedVecs$interpolatedSeasons, col = 'tomato', lwd = 1)
     }
 
+    cbind(data.frame(seriesLength         =  seriesLength,
+                     nOfNAs               =  nOfNAs,
+                     proportionNAs        =  nOfNAs / seriesLength,
+                     nOfYears             =  length(unique(format(datesVector, format = '%Y'))),
+                     nOfMonths            =  length(unique(format(datesVector, format = '%B'))),
+                     nOfDays              =  length(unique(datesVector)),
+                     frequency            =  2 / (length(datesVector) * delta),
+                     nyquistFrequency     =  1 / (2 * delta),
+                     predictedVariance    =  seasonalityList$predictedVariance,
+                     unpredictedVariance  =  seasonalityList$unpredictedVariance,
+                     seasonality          =  seasonalityList$seasonality,
+                     environmentalColor   =  noiseList), colwellStats)
+}
 
-    data.frame(seriesLength         =  seriesLength,
-               nOfNAs               =  nOfNAs,
-               proportionNAs        =  nOfNAs / seriesLength,
-               nOfYears             =  length(unique(format(datesVector, format = '%Y'))),
-               nOfMonths            =  length(unique(format(datesVector, format = '%B'))),
-               nOfDays              =  length(unique(datesVector)),
-               frequency            =  2 / (length(datesVector) * delta),
-               nyquistFrequency     =  1 / (2 * delta),
-               predictedVariance    =  seasonalityList$predictedVariance,
-               unpredictedVariance  =  seasonalityList$unpredictedVariance,
-               seasonality          =  seasonalityList$seasonality,
-               environmentalColor   =  noiseList
-    )
+#' Predictability from Colwell (1974)
+#'
+#' @title Predictability from Colwell (1974)
+#' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
+#' a raw environmental time series.
+#' @param datesVector An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+#' (must be in progressive chronological order).
+#' @param nStates is a \code{\link[base]{numeric}} vector of length 1 containing 
+#' a somewhat arbitrary number, as Colwell's method divides a continuous variable
+#' up into discrete states. No default value. See Details.
+#' @details This algorithm implements the methods described in \href{http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract}{Colwell (1974)} Ecology 55: 1148–1153, doi: \href{http://dx.doi.org/10.2307/1940366}{10.2307/1940366}.
+#' @return A \code{\link[base]{data.frame}} with three environmental predictability components:
+#' constancy (\code{Colwell_C}), contingency (\code{Colwell_M}) and predictability (\code{Colwell_P}).
+#' @author Diego Barneche and Scott Burgess.
+#' @seealso \code{\link[envPred]{envPredictability}}.
+#' @examples
+#' library(envPred)
+#' data(sst)
+#' data(npp)
+#' nStates  <-  11
+#' colwell74(sst$rawTimeSeries, sst$datesVector, nStates)
+#' colwell74(npp$rawTimeSeries, npp$datesVector, nStates)
+#' @export
+colwell74  <-  function (rawTimeSeries, datesVector, nStates) {
+    dat        <-  data.frame(datesVector = datesVector)
+    dat$month  <-  factor(strftime(dat$datesVector, format = '%m'))
+    dat$year   <-  factor(strftime(dat$datesVector, format = '%Y'))
+    dat$yRaw   <-  rawTimeSeries
+    monthAverageAcrossYears         <-  aggregate(yRaw ~ month + year, dat, mean, na.rm = TRUE)
+    monthAverageAcrossYears$yRaw    <-  log10(monthAverageAcrossYears$yRaw + 1)
+    monthAverageAcrossYears$breaks  <-  cut(monthAverageAcrossYears$yRaw, nStates, right = FALSE, include.lowest = TRUE)
+    colwellMat                      <-  with(monthAverageAcrossYears, table(breaks, month))
+    
+    X    <-  colSums(colwellMat, na.rm = TRUE)
+    Y    <-  rowSums(colwellMat, na.rm = TRUE)
+    Z    <-  sum(colwellMat, na.rm = TRUE)
+    HX   <-  -sum((X / Z) * log2(X / Z), na.rm = TRUE)
+    HY   <-  -sum((Y / Z) * log2(Y / Z), na.rm = TRUE)
+    HXY  <-  -sum((colwellMat / Z) * log2(colwellMat / Z), na.rm = TRUE)
+    Colwell_C  <-  1 - (HY / log2(nStates))
+    Colwell_M  <-  (HX + HY - HXY) / log2(nStates)
+    Colwell_P  <-  Colwell_C + Colwell_M
+    data.frame(Colwell_C  =  Colwell_C,
+               Colwell_M  =  Colwell_M,
+               Colwell_P  =  Colwell_P
+               )
 }
 
 #' Linear detrending of time series
