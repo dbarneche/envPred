@@ -4,7 +4,7 @@
 \alias{colwell74}
 \title{Predictability from Colwell (1974)}
 \usage{
-colwell74(rawTimeSeries, datesVector, nStates)
+colwell74(rawTimeSeries, datesVector, nStates = 11)
 }
 \arguments{
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
@@ -15,7 +15,7 @@ a raw environmental time series.}
 
 \item{nStates}{is a \code{\link[base]{numeric}} vector of length 1 containing 
 a somewhat arbitrary number, as Colwell's method divides a continuous variable
-up into discrete states. No default value. See Details.}
+up into discrete states. Default (arbitrary) is 11. See Details.}
 }
 \value{
 A \code{\link[base]{data.frame}} with three environmental predictability components:

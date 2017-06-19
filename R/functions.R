@@ -109,7 +109,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
 #' (must be in progressive chronological order).
 #' @param nStates is a \code{\link[base]{numeric}} vector of length 1 containing 
 #' a somewhat arbitrary number, as Colwell's method divides a continuous variable
-#' up into discrete states. No default value. See Details.
+#' up into discrete states. Default (arbitrary) is 11. See Details.
 #' @details This algorithm implements the methods described in \href{http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract}{Colwell (1974)} Ecology 55: 1148–1153, doi: \href{http://dx.doi.org/10.2307/1940366}{10.2307/1940366}.
 #' @return A \code{\link[base]{data.frame}} with three environmental predictability components:
 #' constancy (\code{Colwell_C}), contingency (\code{Colwell_M}) and predictability (\code{Colwell_P}).
@@ -123,7 +123,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
 #' colwell74(sst$rawTimeSeries, sst$datesVector, nStates)
 #' colwell74(npp$rawTimeSeries, npp$datesVector, nStates)
 #' @export
-colwell74  <-  function (rawTimeSeries, datesVector, nStates) {
+colwell74  <-  function (rawTimeSeries, datesVector, nStates = 11) {
     dat        <-  data.frame(datesVector = datesVector)
     dat$month  <-  factor(strftime(dat$datesVector, format = '%m'))
     dat$year   <-  factor(strftime(dat$datesVector, format = '%Y'))
