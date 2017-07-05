@@ -2,3 +2,4 @@
 
 export(colwell74)
 export(envPredictability)
+export(envPredictabilityAndColwell)

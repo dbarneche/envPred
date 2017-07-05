@@ -18,7 +18,6 @@
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'LombScargle'} for unevenly distributed ones.
-#' @param ... Additional arguments to \code{\link[envPred]{colwell74}}.
 #' @details This function currently allows for monthly-based seasonality calculation only. 
 #' This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 #' 
@@ -45,7 +44,7 @@
 #' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
 #' @export
-envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod, ...) {
+envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod) {
     seriesLength   <-  length(rawTimeSeries)
     nOfNAs         <-  sum(is.na(rawTimeSeries))
 
@@ -73,7 +72,6 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         }
     }
     
-    colwellStats   <-  colwell74(rawTimeSeries, datesVector, ...)
     detrended      <-  linearDetrending(rawTimeSeries, datesVector)
     detrendedVecs  <-  monthlyBinning(detrended$resids, datesVector)
 
@@ -86,18 +84,42 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         lines(datesVector, detrendedVecs$interpolatedSeasons, col = 'tomato', lwd = 1)
     }
 
-    cbind(data.frame(seriesLength         =  seriesLength,
-                     nOfNAs               =  nOfNAs,
-                     proportionNAs        =  nOfNAs / seriesLength,
-                     nOfYears             =  length(unique(format(datesVector, format = '%Y'))),
-                     nOfMonths            =  length(unique(format(datesVector, format = '%B'))),
-                     nOfDays              =  length(unique(datesVector)),
-                     frequency            =  2 / (length(datesVector) * delta),
-                     nyquistFrequency     =  1 / (2 * delta),
-                     predictedVariance    =  seasonalityList$predictedVariance,
-                     unpredictedVariance  =  seasonalityList$unpredictedVariance,
-                     seasonality          =  seasonalityList$seasonality,
-                     environmentalColor   =  noiseList), colwellStats)
+    data.frame(seriesLength         =  seriesLength,
+               nOfNAs               =  nOfNAs,
+               proportionNAs        =  nOfNAs / seriesLength,
+               nOfYears             =  length(unique(format(datesVector, format = '%Y'))),
+               nOfMonths            =  length(unique(format(datesVector, format = '%B'))),
+               nOfDays              =  length(unique(datesVector)),
+               frequency            =  2 / (length(datesVector) * delta),
+               nyquistFrequency     =  1 / (2 * delta),
+               predictedVariance    =  seasonalityList$predictedVariance,
+               unpredictedVariance  =  seasonalityList$unpredictedVariance,
+               seasonality          =  seasonalityList$seasonality,
+               environmentalColor   =  noiseList)
+}
+
+#' Environmental predictability components
+#'
+#' @title Calculates environmental predictability components and Colwell (1974) metric
+#' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
+#' a raw environmental time series.
+#' @param datesVector An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+#' (must be in progressive chronological order).
+#' @param nStates is a \code{\link[base]{numeric}} vector of length 1 containing 
+#' a somewhat arbitrary number, as Colwell's method divides a continuous variable
+#' up into discrete states. Default (arbitrary) is 11. See \code{\link[envPred]{colwell74}}
+#' for Details.
+#' @param ... Additional arguments to \code{\link[envPred]{envPredictability}}.
+#' @details Wrapper function.
+#' @return A \code{\link[base]{data.frame}} with environmental predictability components and 
+#' Colwell (1974) metric.
+#' @author Diego Barneche and Scott Burgess.
+#' @seealso \code{\link[envPred]{envPredictability}},\code{\link[envPred]{colwell74}}.
+#' @export
+envPredictabilityAndColwell  <-  function (rawTimeSeries, datesVector, nStates, ...) {    
+    predicTab      <-  envPredictability(rawTimeSeries, datesVector, ...)
+    colwellStats   <-  colwell74(rawTimeSeries, datesVector, nStates)
+    cbind(predicTab, colwellStats)
 }
 
 #' Predictability from Colwell (1974)

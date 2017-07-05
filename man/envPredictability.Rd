@@ -6,7 +6,7 @@
 \usage{
 envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
   interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE,
-  seasonalityMethod = "bounded", noiseMethod, ...)
+  seasonalityMethod = "bounded", noiseMethod)
 }
 \arguments{
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
@@ -34,8 +34,6 @@ values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).}
 \item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible 
 values: \code{'spectrum'} for evenly distributed time series or 
 \code{'LombScargle'} for unevenly distributed ones.}
-
-\item{...}{Additional arguments to \code{\link[envPred]{colwell74}}.}
 }
 \value{
 A \code{\link[base]{data.frame}} with environmental predictability components.
