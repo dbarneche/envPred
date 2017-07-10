@@ -215,7 +215,7 @@ linearDetrending  <-  function (rawTimeSeries, datesVector) {
 #' @seealso \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 extractSpectrumSlope  <-  function (spectrumObject, plot = FALSE) {
     model  <-  stats::lm(log10(spectrumObject$spec) ~ log10(spectrumObject$freq))
-    spectrumObject_data <- as.data.frame(unclass(spectrumObject[c("spec", "freq")]))
+    spectrumObject_data <- as.data.frame(unclass(spectrumObject)[c("spec", "freq")])
     if (plot) {
         dev.new()
         plot(spec ~ freq, data = spectrumObject_data, type = 'l', xlab = 'Frequency', ylab = 'Spectral power density', col = 'tomato', las = 1)
