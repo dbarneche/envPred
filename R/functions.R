@@ -160,7 +160,6 @@ colwell74  <-  function (rawTimeSeries, datesVector, nStates = 11) {
     dat$year   <-  factor(strftime(dat$datesVector, format = '%Y'))
     dat$yRaw   <-  rawTimeSeries
     monthAverageAcrossYears         <-  aggregate(yRaw ~ month + year, dat, mean, na.rm = TRUE)
-    monthAverageAcrossYears$yRaw    <-  log10(monthAverageAcrossYears$yRaw + 1)
     monthAverageAcrossYears$breaks  <-  cut(monthAverageAcrossYears$yRaw, nStates, right = FALSE, include.lowest = TRUE)
     colwellMat                      <-  with(monthAverageAcrossYears, table(breaks, month))
     
