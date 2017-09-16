@@ -13,8 +13,6 @@
 #' if applying this task to multiple time series at once.
 #' @param showWarnings Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
 #' Strongly recommended for first time users.
-#' @param seasonalityMethod A method for estimating seasonality. Takes 3 possible 
-#' values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'LombScargle'} for unevenly distributed ones.
@@ -37,20 +35,17 @@
 #' data(sst)
 #' # all results return important warning messages of which the user should be aware.
 #' # after double-checking that the data falls within the recommended specs, set showWarnings = FALSE
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
-#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
+#' envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
 #' data(npp)
-#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
-#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, noiseMethod = 'LombScargle')
+#' envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, noiseMethod = 'LombScargle')
 #' @export
-envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod) {
+envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod) {
     seriesLength   <-  length(rawTimeSeries)
     nOfNAs         <-  sum(is.na(rawTimeSeries))
 
-    if (missing(seasonalityMethod)) {
-        seasonalityMethod  <-  'bounded'
-    }
     if (isUneven && noiseMethod == 'spectrum') {
         stop('Time series is uneven, please use noise method LombScargle')
     }
@@ -75,7 +70,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
     detrended      <-  linearDetrending(rawTimeSeries, datesVector)
     detrendedVecs  <-  monthlyBinning(detrended$resids, datesVector)
 
-    seasonalityList  <-  envSeasonality(detrendedVecs$interpolatedSeasons, detrendedVecs$residualTimeSeries, seasonalityMethod)
+    seasonalityList  <-  envSeasonality(detrendedVecs$interpolatedSeasons, detrendedVecs$residualTimeSeries)
     noiseList        <-  envNoise(detrendedVecs$residualTimeSeries, detrended$predictor, checkPlots, noiseMethod)
     
     if (checkPlots) {
@@ -94,7 +89,8 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
                nyquistFrequency     =  1 / (2 * delta),
                predictedVariance    =  seasonalityList$predictedVariance,
                unpredictedVariance  =  seasonalityList$unpredictedVariance,
-               seasonality          =  seasonalityList$seasonality,
+               unBoundedSeasonality =  seasonalityList$unBoundedSeasonality,
+               boundedSeasonality   =  seasonalityList$boundedSeasonality,
                environmentalColor   =  noiseList)
 }
 
@@ -246,34 +242,21 @@ prepareLombScargleOutput  <-  function (residualTimeSeries, ...) {
 #' detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.
 #' @param residualTimeSeries A \code{\link[base]{numeric}} vector containing unpredicted 
 #' detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.
-#' @param seasonalityMethod A method for estimating seasonality. Takes 3 possible 
-#' values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'}, with no default.
 #' @return A \code{\link[base]{list}} containing the sample variance of \code{interpolatedSeasons},
 #' \code{residualTimeSeries}, and the resulting seasonality. See details.
-#' @details If \code{seasonalityMethod} is \code{'absolute'}, then seasonality corresponds to the
-#' sample variance of \code{interpolatedSeasons}; if \code{'unbounded'}, it corresponds to to the 
-#' ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries};
-#' if \code{'bounded'}, it corresponds to the sample variance of \code{interpolatedSeasons}
+#' @details Three types of seasonality are returned currently: an 'absolute' seasonality which corresponds to the sample variance of
+#' \code{interpolatedSeasons}; an unbounded seasonality which corresponds to the 
+#' ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries}; and a 'bounded' seasonality which corresponds to the sample variance of \code{interpolatedSeasons}
 #' relative to the total summed variances of both \code{interpolatedSeasons} and \code{residualTimeSeries}.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{monthlyBinning}}, \code{\link[envPred]{envPredictability}}.
-envSeasonality  <-  function (interpolatedSeasons, residualTimeSeries, seasonalityMethod = c('absolute', 'unbounded', 'bounded')) {
+envSeasonality  <-  function (interpolatedSeasons, residualTimeSeries) {
     varPredict    <-  var(interpolatedSeasons, na.rm = TRUE)
     varUnpredict  <-  var(residualTimeSeries, na.rm = TRUE)
-    switch (match.arg(seasonalityMethod),
-            'absolute' = {
-                seasonality   <-  varPredict
-            },
-            'unbounded' = {
-                seasonality   <-  varPredict / varUnpredict
-            },
-            'bounded' = {
-                seasonality   <-  varPredict / (varPredict + varUnpredict)
-            }
-    )
-    list(predictedVariance    =  varPredict,
-         unpredictedVariance  =  varUnpredict,
-         seasonality          =  seasonality
+    list(predictedVariance     =  varPredict,
+         unpredictedVariance   =  varUnpredict,
+         unBoundedSeasonality  =  varPredict / varUnpredict,
+         boundedSeasonality    =  varPredict / (varPredict + varUnpredict)
         )
 }
 

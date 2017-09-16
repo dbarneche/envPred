@@ -4,8 +4,7 @@
 \alias{envSeasonality}
 \title{Calculate the 'color' of unpredicted detrended residuals}
 \usage{
-envSeasonality(interpolatedSeasons, residualTimeSeries,
-  seasonalityMethod = c("absolute", "unbounded", "bounded"))
+envSeasonality(interpolatedSeasons, residualTimeSeries)
 }
 \arguments{
 \item{interpolatedSeasons}{A \code{\link[base]{numeric}} vector containing predicted (interpolated) 
@@ -13,9 +12,6 @@ detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}
 
 \item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted 
 detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.}
-
-\item{seasonalityMethod}{A method for estimating seasonality. Takes 3 possible 
-values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'}, with no default.}
 }
 \value{
 A \code{\link[base]{list}} containing the sample variance of \code{interpolatedSeasons},
@@ -25,10 +21,9 @@ A \code{\link[base]{list}} containing the sample variance of \code{interpolatedS
 Calculate environmental seasonality
 }
 \details{
-If \code{seasonalityMethod} is \code{'absolute'}, then seasonality corresponds to the
-sample variance of \code{interpolatedSeasons}; if \code{'unbounded'}, it corresponds to to the 
-ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries};
-if \code{'bounded'}, it corresponds to the sample variance of \code{interpolatedSeasons}
+Three types of seasonality are returned currently: an 'absolute' seasonality which corresponds to the sample variance of
+\code{interpolatedSeasons}; an unbounded seasonality which corresponds to the 
+ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries}; and a 'bounded' seasonality which corresponds to the sample variance of \code{interpolatedSeasons}
 relative to the total summed variances of both \code{interpolatedSeasons} and \code{residualTimeSeries}.
 }
 \seealso{

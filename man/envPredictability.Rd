@@ -6,7 +6,7 @@
 \usage{
 envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
   interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE,
-  seasonalityMethod = "bounded", noiseMethod)
+  noiseMethod)
 }
 \arguments{
 \item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
@@ -27,9 +27,6 @@ if applying this task to multiple time series at once.}
 
 \item{showWarnings}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
 Strongly recommended for first time users.}
-
-\item{seasonalityMethod}{A method for estimating seasonality. Takes 3 possible 
-values: \code{'absolute'}, \code{'unbounded'}, or \code{'bounded'} (default).}
 
 \item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible 
 values: \code{'spectrum'} for evenly distributed time series or 
@@ -59,12 +56,12 @@ library(envPred)
 data(sst)
 # all results return important warning messages of which the user should be aware.
 # after double-checking that the data falls within the recommended specs, set showWarnings = FALSE
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'spectrum')
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'bounded', noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
 data(npp)
-envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
-envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = FALSE, checkPlots = TRUE, showWarnings = TRUE, noiseMethod = 'LombScargle')
+envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, noiseMethod = 'LombScargle')
 }
 \seealso{
 \code{\link[envPred]{envSeasonality}}, \code{\link[envPred]{envNoise}}, \code{\link[envPred]{colwell74}}.
