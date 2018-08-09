@@ -1,7 +1,7 @@
 Package: envPred
 Title: Calculate environmental predictability for even an uneven time series data
 Year: 2017
-Version: 0.0.0.1000
+Version: 0.0.1
 License: GPL-2
 Encoding: UTF-8
 Authors@R: c(
@@ -22,5 +22,4 @@ Suggests:
 	testthat
 Remotes:
     dbarneche/noaaErddap
-RoxygenNote: 6.0.1
-Suggests: testthat
+RoxygenNote: 6.1.0
