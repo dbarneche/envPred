@@ -34,19 +34,19 @@ library(envPred)
 ?envPredictability
 
 # then calculate seasonality and color of environmental noise using sample data (temporally even SST data)
-envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
+envPredictability(sst$rawTimeSeries, sst$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
 
 # address first warning
-sst2  <-  sst[1:which(sst$datesVector == as.Date('2007-01-01')), ]
-envPredictability(sst2$rawTimeSeries, sst2$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, seasonalityMethod = 'absolute', noiseMethod = 'spectrum')
+sst2  <-  sst[sst$datesVector <= as.Date('2007-01-01'), ]
+envPredictability(sst2$rawTimeSeries, sst2$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')
 
 # then do the same using temporally uneven NPP data with NAs (carefully check warnings, inspect plots)
-envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, seasonalityMethod = 'unbounded', noiseMethod = 'LombScargle')
+envPredictability(npp$rawTimeSeries, npp$datesVector, delta = 8, isUneven = TRUE, interpolate = TRUE, checkPlots = TRUE, showWarnings = TRUE, noiseMethod = 'LombScargle')
 dev.off(); dev.off(); dev.off()
 ```
 ## Authors
 
-Dr. Diego Barneche (Monash University) and Dr. Scott Burgess (Florida State University Tallahassee)
+Dr. Diego Barneche (University of Exeter) and Dr. Scott Burgess (Florida State University Tallahassee)
 
 ## Bug reporting
 

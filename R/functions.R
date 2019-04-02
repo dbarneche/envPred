@@ -212,7 +212,7 @@ linearDetrending  <-  function (rawTimeSeries, datesVector) {
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
 extractSpectrumSlope  <-  function (spectrumObject, plot = FALSE) {
-    model  <-  stats::lm(log10(spectrumObject$spec) ~ log10(spectrumObject$freq))
+    model  <-  stats::lm(log10(spec) ~ log10(freq), data = spectrumObject)
     if (plot) {
         dev.new()
         plot(spec ~ freq, data = spectrumObject, type = 'l', xlab = 'Frequency', ylab = 'Spectral power density', col = 'tomato', las = 1)
@@ -236,6 +236,22 @@ extractSpectrumSlope  <-  function (spectrumObject, plot = FALSE) {
 prepareLombScargleOutput  <-  function (residualTimeSeries, ...) {
     LombScargleObj  <-  lomb::lsp(residualTimeSeries, plot = FALSE, ...)
     data.frame(freq = LombScargleObj$scanned, spec = LombScargleObj$power, stringsAsFactors = FALSE)
+}
+
+#' Adapt Spectrum Periodogram
+#'
+#' @title Calculates and renames output of Spectrum Periodogram 
+#' @param residualTimeSeries A \code{\link[base]{numeric}} vector containing unpredicted 
+#' detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.
+#' @param ... Additional arguments to \code{\link[stats]{spectrum}}.
+#' @return A \code{\link[base]{data.frame}} containing a vector 
+#' of frequencies/periods scanned, and a vector containing the normalised power
+#' corresponding to scanned frequencies/periods.
+#' @author Diego Barneche and Scott Burgess.
+#' @seealso \code{\link[envPred]{extractSpectrumSlope}}, \code{\link[envPred]{envPredictability}}.
+prepareSpectrumOutput  <-  function (residualTimeSeries, ...) {
+    spectrumObj  <-  stats::spectrum(stats::as.ts(residualTimeSeries), plot = FALSE, ...)
+    data         <-  data.frame(freq = spectrumObj$freq, spec = spectrumObj$spec, stringsAsFactors = FALSE)
 }
 
 #' Calculate environmental seasonality
@@ -282,14 +298,13 @@ envSeasonality  <-  function (interpolatedSeasons, residualTimeSeries) {
 envNoise  <-  function (residualTimeSeries, predictor, checkPlots, noiseMethod = c('spectrum', 'LombScargle')) {
     switch (match.arg(noiseMethod),
             'spectrum' = {
-                betaLS1  <-  extractSpectrumSlope(stats::spectrum(stats::as.ts(residualTimeSeries), plot = FALSE), plot = checkPlots)
+                spectrumObj  <-  prepareSpectrumOutput(residualTimeSeries)
             },
             'LombScargle' = {
-                LombScargleObj  <-  prepareLombScargleOutput(residualTimeSeries, times = predictor)
-                betaLS1         <-  extractSpectrumSlope(LombScargleObj, plot = checkPlots)
+                spectrumObj  <-  prepareLombScargleOutput(residualTimeSeries, times = predictor)
             }
     )
-    betaLS1
+    extractSpectrumSlope(spectrumObj, plot = checkPlots)
 }
 
 #' Compute the seasonal (monthly) components of time series
