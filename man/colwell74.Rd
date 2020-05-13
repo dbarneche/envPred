@@ -11,23 +11,23 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
 colwell74(rawTimeSeries, datesVector, nStates = 11)
 }
 \arguments{
-\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
+\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
-\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD
 (must be in progressive chronological order).}
 
-\item{nStates}{is a \code{\link[base]{numeric}} vector of length 1 containing 
+\item{nStates}{is a \code{\link[base]{numeric}} vector of length 1 containing
 a somewhat arbitrary number, as Colwell's method divides a continuous variable
 up into discrete states. Default (arbitrary) is 11. See Details.}
 }
 \value{
 A \code{\link[base]{data.frame}} with three environmental predictability components:
 constancy (\code{Colwell_C}), contingency (\code{Colwell_M}) and predictability (\code{Colwell_P}).
-Constancy (C) measures the extent to which the environment is the same for all months in all years. 
-Contingency (M) measures the extent to which the environmental differences between months are the same 
-in all years. Predictability (P) is the sum of Constancy (C) and Contingency (M). Maximum predictability 
-can be attained as a consequence of either complete constancy, complete contingency, or a combination 
+Constancy (C) measures the extent to which the environment is the same for all months in all years.
+Contingency (M) measures the extent to which the environmental differences between months are the same
+in all years. Predictability (P) is the sum of Constancy (C) and Contingency (M). Maximum predictability
+can be attained as a consequence of either complete constancy, complete contingency, or a combination
 of constancy and contingency.
 }
 \description{

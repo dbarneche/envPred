@@ -1,0 +1,6 @@
+^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^appveyor\.yml$

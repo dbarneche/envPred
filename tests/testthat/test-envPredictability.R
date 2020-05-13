@@ -62,7 +62,7 @@ test_that('Simple corner cases', {
     # rawTimeSeries is not of numeric
     expect_warning(expect_error(envPredictability(sample(letters, nrow(sst3), replace = TRUE), sst3$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')))
     expect_warning(expect_error(envPredictability(rep(NA, nrow(sst3)), sst3$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')))
-    expect_warning(expect_error(envPredictability(rep(NULL, nrow(sst3)), sst3$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum')))
+    expect_error(envPredictability(rep(NULL, nrow(sst3)), sst3$datesVector, delta = 1, isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum'))
 
     # delta is not numeric
     expect_error(envPredictability(sst3$rawTimeSeries, sst3$datesVector, delta = 'a', isUneven = FALSE, interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE, noiseMethod = 'spectrum'), 'non-numeric argument to binary operator')

@@ -4,32 +4,39 @@
 \alias{envPredictability}
 \title{Calculates environmental predictability components}
 \usage{
-envPredictability(rawTimeSeries, datesVector, delta, isUneven = FALSE,
-  interpolate = FALSE, checkPlots = FALSE, showWarnings = TRUE,
-  noiseMethod)
+envPredictability(
+  rawTimeSeries,
+  datesVector,
+  delta,
+  isUneven = FALSE,
+  interpolate = FALSE,
+  checkPlots = FALSE,
+  showWarnings = TRUE,
+  noiseMethod
+)
 }
 \arguments{
-\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
+\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
-\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD
 (must be in progressive chronological order).}
 
 \item{delta}{Time interval (any unit) of \code{rawTimeSeries}.}
 
 \item{isUneven}{Is \code{rawTimeSeries} even or unevenly distributed in time? Default is \code{\link[base]{FALSE}}.}
 
-\item{interpolate}{Should a linear interpolation be applied to missing values in 
+\item{interpolate}{Should a linear interpolation be applied to missing values in
 \code{rawTimeSeries}? Irrelevant method if \code{isUneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.}
 
-\item{checkPlots}{Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}. Not recommended 
+\item{checkPlots}{Should inspection plots be triggered? Default is \code{\link[base]{FALSE}}. Not recommended
 if applying this task to multiple time series at once.}
 
-\item{showWarnings}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
+\item{showWarnings}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}.
 Strongly recommended for first time users.}
 
-\item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible 
-values: \code{'spectrum'} for evenly distributed time series or 
+\item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible
+values: \code{'spectrum'} for evenly distributed time series or
 \code{'LombScargle'} for unevenly distributed ones.}
 }
 \value{
@@ -39,16 +46,16 @@ A \code{\link[base]{data.frame}} with environmental predictability components.
 Environmental predictability components
 }
 \details{
-This function currently allows for monthly-based seasonality calculation only. 
+This function currently allows for monthly-based seasonality calculation only.
 This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 
-We advise caution for datasets in which \code{rawTimeSeries} contains NAs. Particularly, 
-we strongly advise setting \code{interpolate = FALSE} for \code{rawTimeSeries} containing large 
+We advise caution for datasets in which \code{rawTimeSeries} contains NAs. Particularly,
+we strongly advise setting \code{interpolate = FALSE} for \code{rawTimeSeries} containing large
 continuous chunks of NAs because the linear interpolation might introduce substantial bias.
 
 \href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
 
-Also note that if \code{datesVector} starts and ends in different month of the year, 
+Also note that if \code{datesVector} starts and ends in different month of the year,
 some monthly means are estimated with relatively less precision.
 }
 \examples{

@@ -7,7 +7,7 @@
 extractSpectrumSlope(spectrumObject, plot = FALSE)
 }
 \arguments{
-\item{spectrumObject}{A \code{\link[base]{data.frame}} containing a vector 
+\item{spectrumObject}{A \code{\link[base]{data.frame}} containing a vector
 of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.}
 

@@ -7,13 +7,13 @@
 envPredictabilityAndColwell(rawTimeSeries, datesVector, nStates, ...)
 }
 \arguments{
-\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
+\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
-\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
+\item{datesVector}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD
 (must be in progressive chronological order).}
 
-\item{nStates}{is a \code{\link[base]{numeric}} vector of length 1 containing 
+\item{nStates}{is a \code{\link[base]{numeric}} vector of length 1 containing
 a somewhat arbitrary number, as Colwell's method divides a continuous variable
 up into discrete states. Default (arbitrary) is 11. See \code{\link[envPred]{colwell74}}
 for Details.}
@@ -21,7 +21,7 @@ for Details.}
 \item{...}{Additional arguments to \code{\link[envPred]{envPredictability}}.}
 }
 \value{
-A \code{\link[base]{data.frame}} with environmental predictability components and 
+A \code{\link[base]{data.frame}} with environmental predictability components and
 Colwell (1974) metric.
 }
 \description{

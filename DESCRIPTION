@@ -1,25 +1,30 @@
 Package: envPred
+Type: Package
 Title: Calculate environmental predictability for even an uneven time series data
-Year: 2017
-Version: 0.0.1
-License: GPL-2
-Encoding: UTF-8
+Version: 1.0.0
 Authors@R: c(
-	person("Diego", "Barneche", , "diego.barneche@monash.edu", c("aut", "cre")),
+	person("Diego", "Barneche", , "d.barneche@aims.gov.au", c("aut", "cre")),
     person("Scott", "Burgess", , "sburgess@bio.fsu.edu", "aut")
 	)
-URL: https://github.com/dbarneche/envPred
-BugReports: https://github.com/dbarneche/envPred/issues
+Maintainer: Diego Barneche <d.barneche@aims.gov.au>
 Description: The package provides calculations to multiple components of environmental predictability.
 Depends:
-	R (>= 3.3.2)
-LazyData: true
+	R (>= 3.6.0)
 Imports:
-	lomb,
 	noaaErddap,
+	lomb,
 	imputeTS
 Suggests:
-	testthat
-Remotes:
-    dbarneche/noaaErddap
-RoxygenNote: 6.1.0
+    knitr,
+    rmarkdown,
+    testthat,
+    covr
+Remotes: dbarneche/noaaErddap
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+URL: https://github.com/dbarneche/envPred
+BugReports: https://github.com/dbarneche/envPred/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0

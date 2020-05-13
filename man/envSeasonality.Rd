@@ -7,10 +7,10 @@
 envSeasonality(interpolatedSeasons, residualTimeSeries)
 }
 \arguments{
-\item{interpolatedSeasons}{A \code{\link[base]{numeric}} vector containing predicted (interpolated) 
+\item{interpolatedSeasons}{A \code{\link[base]{numeric}} vector containing predicted (interpolated)
 detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.}
 
-\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted 
+\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted
 detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.}
 }
 \value{
@@ -22,7 +22,7 @@ Calculate environmental seasonality
 }
 \details{
 Three types of seasonality are returned currently: an 'absolute' seasonality which corresponds to the sample variance of
-\code{interpolatedSeasons}; an unbounded seasonality which corresponds to the 
+\code{interpolatedSeasons}; an unbounded seasonality which corresponds to the
 ratio between sample variances of \code{interpolatedSeasons} and \code{residualTimeSeries}; and a 'bounded' seasonality which corresponds to the sample variance of \code{interpolatedSeasons}
 relative to the total summed variances of both \code{interpolatedSeasons} and \code{residualTimeSeries}.
 }

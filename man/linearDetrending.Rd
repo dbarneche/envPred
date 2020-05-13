@@ -7,15 +7,15 @@
 linearDetrending(rawTimeSeries, datesVector)
 }
 \arguments{
-\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing 
+\item{rawTimeSeries}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
 \item{datesVector}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
 (must be in progressive chronological order).}
 }
 \value{
-A \code{\link[base]{list}} containing a \code{\link[base]{numeric}} vector 
-of the time (in days) for each observation in \code{rawTimeSeries} starting at day 0, 
+A \code{\link[base]{list}} containing a \code{\link[base]{numeric}} vector
+of the time (in days) for each observation in \code{rawTimeSeries} starting at day 0,
 and a \code{\link[base]{numeric}} vector containing the residual variation of \code{rawTimeSeries}
 after removing the linear trend.
 }

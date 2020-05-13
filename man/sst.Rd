@@ -4,11 +4,13 @@
 \name{sst}
 \alias{sst}
 \title{Sea Surface Temperature (SST) Time Series (1997-01-01 - 2007-12-31)}
-\format{A data frame with 4017 rows and 2 variables:
+\format{
+A data frame with 4017 rows and 2 variables:
 \itemize{
-	\item rawTimeSeries: A numeric vector containing a raw environmental time series
-	\item datesVector:  A vector of class Date of format YYYY-MM-DD
-}}
+\item rawTimeSeries: A numeric vector containing a raw environmental time series
+\item datesVector:  A vector of class Date of format YYYY-MM-DD
+}
+}
 \description{
 A dataset containing raw time series for SST at one random coordinate.
 This time series is evenly distributed with delta time = 1 day.

@@ -50,7 +50,7 @@ envPredictability  <-  function (rawTimeSeries, datesVector, delta, isUneven = F
         stop('Time series is uneven, please use noise method LombScargle')
     }
     if (any(is.na(rawTimeSeries)) && interpolate) {
-        rawTimeSeries  <-  imputeTS::na.interpolation(rawTimeSeries, option = 'linear')
+        rawTimeSeries  <-  imputeTS::na_interpolation(rawTimeSeries, option = 'linear')
     }
     if (showWarnings) {
         if (any(is.na(rawTimeSeries))) {

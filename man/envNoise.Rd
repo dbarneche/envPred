@@ -4,11 +4,15 @@
 \alias{envNoise}
 \title{Calculate the 'color' of the noise of unpredicted detrended residuals}
 \usage{
-envNoise(residualTimeSeries, predictor, checkPlots,
-  noiseMethod = c("spectrum", "LombScargle"))
+envNoise(
+  residualTimeSeries,
+  predictor,
+  checkPlots,
+  noiseMethod = c("spectrum", "LombScargle")
+)
 }
 \arguments{
-\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted 
+\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted
 detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.}
 
 \item{predictor}{A \code{\link[base]{numeric}} vector containing the time (in days)
@@ -16,8 +20,8 @@ for each observation in \code{residualTimeSeries}. Needs to start at day 0.}
 
 \item{checkPlots}{Should inspection plots be triggered? No default value.}
 
-\item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible 
-values: \code{'spectrum'} for evenly distributed time series or 
+\item{noiseMethod}{A method for estimating the slope beta. Takes 2 possible
+values: \code{'spectrum'} for evenly distributed time series or
 \code{'LombScargle'} for unevenly distributed ones.}
 }
 \value{

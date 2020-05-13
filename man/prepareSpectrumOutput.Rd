@@ -7,13 +7,13 @@
 prepareSpectrumOutput(residualTimeSeries, ...)
 }
 \arguments{
-\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted 
+\item{residualTimeSeries}{A \code{\link[base]{numeric}} vector containing unpredicted
 detrended residuals as obtained by function \code{\link[envPred]{monthlyBinning}}.}
 
 \item{...}{Additional arguments to \code{\link[stats]{spectrum}}.}
 }
 \value{
-A \code{\link[base]{data.frame}} containing a vector 
+A \code{\link[base]{data.frame}} containing a vector
 of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.
 }

@@ -4,11 +4,13 @@
 \name{npp}
 \alias{npp}
 \title{Net Primary Productivity (NPP) Time Series (1997-09-10 - 2008-01-05)}
-\format{A data frame with 465 rows and 2 variables:
+\format{
+A data frame with 465 rows and 2 variables:
 \itemize{
-	\item rawTimeSeries: A numeric vector containing a raw environmental time series
-	\item datesVector:  A vector of class Date of format YYYY-MM-DD
-}}
+\item rawTimeSeries: A numeric vector containing a raw environmental time series
+\item datesVector:  A vector of class Date of format YYYY-MM-DD
+}
+}
 \description{
 A dataset containing raw time series for NPP at one random coordinate.
 This time series is unevenly distributed with average delta time = 8 days.

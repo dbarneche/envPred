@@ -7,16 +7,16 @@
 monthlyBinning(resids, datesVec)
 }
 \arguments{
-\item{resids}{A \code{\link[base]{numeric}} vector containing the residual 
+\item{resids}{A \code{\link[base]{numeric}} vector containing the residual
 variation of a raw time series after removing the linear trend.}
 
 \item{datesVec}{An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
 (must be in progressive chronological order).}
 }
 \value{
-A \code{\link[base]{list}} containing the a \code{\link[base]{numeric}} 
+A \code{\link[base]{list}} containing the a \code{\link[base]{numeric}}
 vector containing predicted (interpolated) detrended residuals (\code{'interpolatedSeasons'}), and
-a \code{\link[base]{numeric}} vector containing unpredicted detrended residuals 
+a \code{\link[base]{numeric}} vector containing unpredicted detrended residuals
 \code{'residualTimeSeries'}. See details.
 }
 \description{
