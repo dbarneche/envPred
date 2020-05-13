@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-envPred <img src="man/figures/logo.png" width = 180 alt="envPred Logo" align="right" />
+envPred <img src="man/figures/logo.png" width = 150 alt="envPred Logo" align="right" />
 =======================================================================================
 
 <!-- badges: start -->
