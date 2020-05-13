@@ -10,22 +10,13 @@ sudo:
 warnings_are_errors: 
   - true
 
-before_install:
-  - chmod 755 ./travis-tool/travis_timeout.sh
-  - sudo apt-get install libssl-dev
-  - sudo apt-get install libcurl4-openssl-dev
-  - sudo apt-get install libhdf5-7
-  - sudo apt-get install libhdf5-dev
-  - sudo apt-get install libudunits2-0
-  - sudo apt-get install libudunits2-dev
-  - export LD_LIBRARY_PATH=/usr/local/lib
-  - wget ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.tar.gz
-  - tar xvzf netcdf-4.4.1.tar.gz
-  - cd netcdf-4.4.1
-  - ./configure
-  - make check
-  - sudo make install
-  - cd ..
+addons:
+    apt:
+        packages:
+            - libudunits2-dev
+            - libnetcdf-dev
+            - netcdf-bin
+            - libproj-dev 
 
 script: 
   - ./travis-tool/travis_timeout.sh travis_wait
