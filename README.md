@@ -8,8 +8,10 @@ envPred
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build
 status](https://github.com/dbarneche/envPred/workflows/R-CMD-check/badge.svg)](https://github.com/dbarneche/envPred/actions)
+[![Travis-CI Build
+Status](http://badges.herokuapp.com/travis/dbarneche/envPred?branch=master&env=BUILD_NAME=trusty_release&label=linux)](https://travis-ci.org/dbarneche/envPred)
 [![Build
-Status](https://api.travis-ci.org/dbarneche/envPred.png?branch=master)](https://travis-ci.org/dbarneche/envPred)
+Status](http://badges.herokuapp.com/travis/dbarneche/envPred?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/dbarneche/envPred)
 [![Codecov test
 coverage](https://codecov.io/gh/dbarneche/envPred/branch/master/graph/badge.svg)](https://codecov.io/gh/dbarneche/envPred?branch=master)
 [![AppVeyor build
@@ -71,8 +73,8 @@ Examples
 Authors
 -------
 
-Dr. Diego Barneche (University of Exeter) and Dr. Scott Burgess (Florida
-State University Tallahassee)
+Dr. Diego Barneche (Australian Institute of Marine Science) and
+Dr. Scott Burgess (Florida State University Tallahassee)
 
 Bug reporting
 -------------
