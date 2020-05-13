@@ -15,7 +15,7 @@
 #' @export
 #' @importFrom dplyr %>% rename
 #' @importFrom tidyr pivot_longer
-#' @importFrom ggplot2 ggplot geom_line scale_colour_manual theme_bw labs theme
+#' @importFrom ggplot2 ggplot aes geom_line scale_colour_manual theme_bw labs theme coord_trans
 #' @examples
 #' \dontrun{
 #' library(envPred)
@@ -29,8 +29,7 @@
 #'                       noise_method = 'spectrum')
 #' 
 #' gg_pred(dat, type = "detrended")
-#' gg_pred(dat, type = "spectral") +
-#'   coord_trans(x = "log10", y = "log10")
+#' gg_pred(dat, type = "spectral")
 #' }
 gg_pred <- function(object, type = c("detrended", "spectral")) {
   switch(match.arg(type),
@@ -55,7 +54,8 @@ gg_pred <- function(object, type = c("detrended", "spectral")) {
              ggplot(aes(x = freq, y = spec)) +
                geom_line(colour = "tomato") +
                theme_bw() +
-               labs(x = "Frequency", y = "Spectral power density")
+               labs(x = "Frequency", y = "Spectral power density") +
+               coord_trans(x = "log10", y = "log10")
          }
   )
 }

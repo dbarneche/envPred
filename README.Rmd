@@ -47,57 +47,6 @@ Then install `envPred` using the following:
 `install_github("dbarneche/envPred")`  
 `library(envPred)`
 
-## Examples
-
-```{r, message = FALSE}
-library(envPred)
-```
-
-First, we recommend carefully reading the help page for the main functions
-
-```{r, eval = FALSE}
-?predictability
-?colwell74
-```
-
-To calculate seasonality and colour of environmental noise using sample data (temporally even SST data):
-
-```{r}
-sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
-                           is_uneven = FALSE, interpolate = FALSE,
-                           show_warns = TRUE, noise_method = "spectrum")
-```
-
-The package threw a warning, which can be addressed in this example by:
-
-```{r, warnings = FALSE}
-sst  <-  sst[sst$dates <= as.Date("2007-01-01"), ]
-sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
-                           is_uneven = FALSE, interpolate = FALSE,
-                           show_warns = TRUE, noise_method = "spectrum")
-```
-
-The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods:
-
-```{r}
-gg_pred(sst_pred, type = "detrended")
-```
-
-```{r}
-gg_pred(sst_pred, type = "spectral") +
-  coord_trans(x = "log10", y = "log10")
-```
-
-Finally, the package also handles temporally uneven NPP data
-with NAs (carefully check warnings), by using the Lomb-Scargle Periodogram from package
-[`lomb`](https://cran.r-project.org/web/packages/lomb/index.html).
-
-```{r, warning = FALSE}
-npp_pred  <-  predictability(npp$time_series, npp$dates, delta = 8,
-                             is_uneven = TRUE, interpolate = TRUE,
-                             show_warns = TRUE, noise_method = "lomb_scargle")
-```
-
 ## Available data sources in envPred
 
 The following sample data were obtained using the [noaaErddap](https://github.com/dbarneche/noaaErddap/) R package:

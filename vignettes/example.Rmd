@@ -1,0 +1,60 @@
+---
+title: "General envPred usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{General envPred usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Before starting, please make sure you run through the [installation steps](../index.html). After successful installation, load the package:
+
+```{r, message = FALSE}
+library(envPred)
+```
+
+First, we recommend carefully reading the help page for the main functions
+
+```{r, eval = FALSE}
+?predictability
+?colwell74
+```
+
+To calculate seasonality and colour of environmental noise using sample data (temporally even SST data):
+
+```{r}
+sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
+                           is_uneven = FALSE, interpolate = FALSE,
+                           show_warns = TRUE, noise_method = "spectrum")
+```
+
+The package threw a warning, which can be addressed in this example by:
+
+```{r, warnings = FALSE}
+sst  <-  sst[sst$dates <= as.Date("2007-01-01"), ]
+sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
+                           is_uneven = FALSE, interpolate = FALSE,
+                           show_warns = TRUE, noise_method = "spectrum")
+```
+
+The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods. The use can plot both the de-trended dataset,
+
+```{r}
+gg_pred(sst_pred, type = "detrended")
+```
+
+or the spectral density on the log 10 scale
+
+```{r}
+gg_pred(sst_pred, type = "spectral")
+```
+
+Finally, the package also handles temporally uneven NPP data
+with NAs (carefully check warnings), by using the Lomb-Scargle Periodogram from package
+[`lomb`](https://cran.r-project.org/web/packages/lomb/index.html).
+
+```{r, warning = FALSE}
+npp_pred  <-  predictability(npp$time_series, npp$dates, delta = 8,
+                             is_uneven = TRUE, interpolate = TRUE,
+                             show_warns = TRUE, noise_method = "lomb_scargle")
+```

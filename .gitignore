@@ -18,15 +18,9 @@
 *.xls*
 
 # package development
-checkPackage.R
-envPred.Rcheck/
 envPred*tar.gz
 inst/doc
 inst/web
-vignettes/
-!vignettes/envPred.Rmd
-vignettes/*.html
-vignettes/*.pdf
 
 # Personal
 TODO.md

@@ -33,7 +33,6 @@ dat <- predictability(sst$time_series,
                       noise_method = 'spectrum')
 
 gg_pred(dat, type = "detrended")
-gg_pred(dat, type = "spectral") +
-  coord_trans(x = "log10", y = "log10")
+gg_pred(dat, type = "spectral")
 }
 }
