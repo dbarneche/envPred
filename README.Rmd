@@ -20,7 +20,7 @@ version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
 version <- gsub('-', '.', version)
 ```
 
-# envPred
+# envPred <img src="man/figures/logo.png" width = 180 alt="envPred Logo" align="right" />
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
