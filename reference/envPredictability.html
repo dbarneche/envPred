@@ -8,6 +8,13 @@
 
 <title>Calculates environmental predictability components — envPredictability • envPred</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Calculates environmental predictability components — envPredictability" />
 <meta property="og:description" content="Environmental predictability components" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -216,7 +224,7 @@ some monthly means are estimated with relatively less precision.</p>
 #&gt; 1           0.7072908              5.78261          0.8525641
 #&gt;   environmentalColor
 #&gt; 1           1.716807</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>npp</span>)
-<span class='fu'>envPredictability</span>(<span class='no'>npp</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>npp</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'LombScargle'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data contains NAs, we strongly advise setting "interpolate = FALSE" for rawTimeSeries containing large continuous chunks of NAs</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots48.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots49.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots50.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
+<span class='fu'>envPredictability</span>(<span class='no'>npp</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>npp</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'LombScargle'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data contains NAs, we strongly advise setting "interpolate = FALSE" for rawTimeSeries containing large continuous chunks of NAs</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots56.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots57.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots58.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
 #&gt; 1          465     58     0.1247312       12        12     465 0.0005376344
 #&gt;   nyquistFrequency  rawMean rawVariance     rawCV predictedVariance
 #&gt; 1           0.0625 485.0939    14448.82 0.2477938          4536.062
@@ -225,7 +233,7 @@ some monthly means are estimated with relatively less precision.</p>
 #&gt;   environmentalColor
 #&gt; 1           0.538234</div><div class='input'><span class='fu'>envPredictability</span>(<span class='no'>npp</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>npp</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'LombScargle'</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
 #&gt; <span class='message'>  method            from</span>
-#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots51.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots52.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots53.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
+#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots59.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots60.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots61.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
 #&gt; 1          465     58     0.1247312       12        12     465 0.0005376344
 #&gt;   nyquistFrequency  rawMean rawVariance    rawCV predictedVariance
 #&gt; 1           0.0625 481.6442    13741.58 0.243384          4530.895
