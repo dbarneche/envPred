@@ -75,7 +75,7 @@ dev.off(); dev.off(); dev.off()
 ```
 ## Authors
 
-Dr. Diego Barneche (University of Exeter) and Dr. Scott Burgess (Florida State University Tallahassee)
+Dr. Diego Barneche (Australian Institute of Marine Science) and Dr. Scott Burgess (Florida State University Tallahassee)
 
 ## Bug reporting
 
