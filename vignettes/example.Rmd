@@ -7,8 +7,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Before starting, please make sure you run through the [installation steps](../index.html). After successful installation, load the package:
-
 ```{r, message = FALSE}
 library(envPred)
 ```
