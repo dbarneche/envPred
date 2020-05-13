@@ -1,7 +1,6 @@
 Package: envPred
-Type: Package
 Title: Calculate environmental predictability for even an uneven time series data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
 	person("Diego", "Barneche", , "d.barneche@aims.gov.au", c("aut", "cre")),
     person("Scott", "Burgess", , "sburgess@bio.fsu.edu", "aut")
@@ -13,7 +12,10 @@ Depends:
 Imports:
 	noaaErddap,
 	lomb,
-	imputeTS
+	imputeTS,
+	ggplot2,
+	dplyr,
+	tidyr
 Suggests:
     knitr,
     rmarkdown,

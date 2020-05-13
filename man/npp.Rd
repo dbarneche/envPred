@@ -7,8 +7,8 @@
 \format{
 A data frame with 465 rows and 2 variables:
 \itemize{
-\item rawTimeSeries: A numeric vector containing a raw environmental time series
-\item datesVector:  A vector of class Date of format YYYY-MM-DD
+\item time_series: A numeric vector containing a raw environmental time series
+\item dates:  A vector of class Date of format YYYY-MM-DD
 }
 }
 \description{
