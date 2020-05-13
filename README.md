@@ -29,8 +29,8 @@ Installation
 ------------
 
 The `envPred` package can be installed from github using the
-[`devtools`](https://cran.r-project.org/web/packages/devtools/index.html)
-package using `devtools::install_github`.
+[`devtools`](https://CRAN.R-project.org/package=devtools) package using
+`devtools::install_github`.
 
 If you do not yet have `devtools`, install with
 `install.packages("devtools")`.

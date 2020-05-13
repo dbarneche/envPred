@@ -28,13 +28,6 @@
 #' @return A \code{\link[base]{data.frame}} with environmental predictability components.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link{seasonality_calc}}, \code{\link{noise_calc}}, \code{\link{colwell74}}.
-#' @export
-predictability <- function(time_series, dates, delta, is_uneven = FALSE,
-                           interpolate = FALSE, show_warns = TRUE,
-                           noise_method) {
-  UseMethod("predictability")
-}
-
 #' @examples
 #' library(envPred)
 #' data(sst)
@@ -79,8 +72,9 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
 #'                show_warns = TRUE,
 #'                noise_method = 'lomb_scargle')
 #' @importFrom imputeTS na_interpolation
+#' @importFrom stats var sd
 #' @export
-predictability.default <- function(time_series, dates, delta, is_uneven = FALSE,
+predictability <- function(time_series, dates, delta, is_uneven = FALSE,
                            interpolate = FALSE, show_warns = TRUE,
                            noise_method) {
   series_n  <- length(time_series)

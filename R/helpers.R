@@ -22,11 +22,12 @@ detrend_and_bin <- function(...) {
 #' and a \code{\link[base]{numeric}} vector containing the residual variation of \code{time_series}
 #' after removing the linear trend.
 #' @author Diego Barneche and Scott Burgess.
+#' @importFrom stats coef lm
 #' @seealso \code{\link{predictability}}.
 linear_detrend <- function(time_series, dates) {
   predictor <- cumsum(c(0, difftime(dates[2:length(dates)],
                                     dates[1:(length(dates) - 1)],
-                                    unit = "days")))
+                                    units = "days")))
   lm_mod <- lm(time_series ~ predictor)
   predicted_av <- matrix(c(rep(1, length(predictor)), predictor), ncol = 2)
   predicted_av <- predicted_av %*% coef(lm_mod)
@@ -45,9 +46,10 @@ linear_detrend <- function(time_series, dates) {
 #' @return A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
 #' @details Calculates slope of log10(normalised power)~log10(frequencies).
 #' @author Diego Barneche and Scott Burgess.
+#' @importFrom stats coef lm
 #' @seealso \code{\link{predictability}}.
 spec_slope_get <- function(spec_obj) {
-  model <- stats::lm(log10(spec) ~ log10(freq), data = spec_obj)
+  model <- lm(log10(spec) ~ log10(freq), data = spec_obj)
   list(slope = as.numeric(abs(coef(model)[2])),
        spec_obj = spec_obj)
 }
@@ -81,11 +83,12 @@ lmb_output_prep <- function(resid_time_series, ...) {
 #' of frequencies/periods scanned, and a vector containing the normalised power
 #' corresponding to scanned frequencies/periods.
 #' @author Diego Barneche and Scott Burgess.
+#' @importFrom stats spectrum as.ts
 #' @seealso \code{\link{spec_slope_get}}, \code{\link{predictability}}.
 spec_output_prep <- function(resid_time_series, ...) {
-  spec_obj <- stats::spectrum(stats::as.ts(resid_time_series),
-                              plot = FALSE,
-                              ...)
+  spec_obj <- spectrum(as.ts(resid_time_series),
+                       plot = FALSE,
+                       ...)
   data.frame(freq = spec_obj$freq,
              spec = spec_obj$spec,
              stringsAsFactors = FALSE)
@@ -105,6 +108,7 @@ spec_output_prep <- function(resid_time_series, ...) {
 #' ratio between sample variances of \code{interpolated_seasons} and \code{resid_time_series}; and a 'bounded' seasonality which corresponds to the sample variance of \code{interpolated_seasons}
 #' relative to the total summed variances of both \code{interpolated_seasons} and \code{resid_time_series}.
 #' @author Diego Barneche and Scott Burgess.
+#' @importFrom stats var
 #' @seealso \code{\link{monthly_bins}}, \code{\link{predictability}}.
 seasonality_calc <- function(interpolated_seasons, resid_time_series) {
   var_predict <- var(interpolated_seasons, na.rm = TRUE)
@@ -159,6 +163,7 @@ noise_calc <- function(resid_time_series, predictor,
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link{predictability}}.
 #' @importFrom noaaErddap findLastDayOfTheMonth
+#' @importFrom stats aggregate approxfun median
 monthly_bins <- function(resids, dates) {
   fct <- findLastDayOfTheMonth
   month_av_res_yrs <- aggregate(resids, by = list(format(dates, format = "%B")),

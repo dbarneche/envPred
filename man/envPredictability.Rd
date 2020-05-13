@@ -32,7 +32,7 @@ a raw environmental time series.}
 \item{interpolate}{Should a linear interpolation be applied to missing values in
 \code{rawTimeSeries}? Irrelevant method if \code{isUneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.}
 
-\item{checkPlots}{Deprecated. Use newer \code{\link{gg_pred}} instead.}
+\item{checkPlots}{Deprecated. Use newer \code{\link{gg_envpred}} instead.}
 
 \item{showWarnings}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}.
 Strongly recommended for first time users.}

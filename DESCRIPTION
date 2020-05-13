@@ -1,12 +1,11 @@
 Package: envPred
-Title: Calculate environmental predictability for even an uneven time series data
+Title: Calculate Environmental Predictability for Even and Uneven Time Series Data
 Version: 1.0.1
 Authors@R: c(
 	person("Diego", "Barneche", , "d.barneche@aims.gov.au", c("aut", "cre")),
     person("Scott", "Burgess", , "sburgess@bio.fsu.edu", "aut")
 	)
-Maintainer: Diego Barneche <d.barneche@aims.gov.au>
-Description: The package provides calculations to multiple components of environmental predictability.
+Description: Calculations to multiple components of environmental predictability.
 Depends:
 	R (>= 3.6.0)
 Imports:

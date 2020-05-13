@@ -46,6 +46,7 @@ predictability_and_colwell <- function(time_series, dates, n_states, ...) {
 #' of constancy and contingency.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link{predictability}}.
+#' @importFrom stats aggregate
 #' @examples
 #' library(envPred)
 #' data(sst)

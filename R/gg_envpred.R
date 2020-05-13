@@ -1,18 +1,14 @@
 #' Plot predictability object
-#' 
-#' @param object A \code{\link{predictability}} object
 #'
-#' @param type Either \{detrended} or \code{spectral}
-#' (see Details)
-#'
+#' @param object A \code{\link{predictability}} object.
+#' @param type Either \code{detrended} (default) or \code{spectral}.
+#' See Details.
 #' @details Two types of plots are provided:
 #' detrended: show the time series after linear
 #' de-trending, including the seasonality interpolation.
-#'
 #' spectral: The spectral power density as
 #' a function of frequency.
-#' 
-#' @export
+#' @return A \code{\link[ggplot2]{ggplot}} object.
 #' @importFrom dplyr %>% rename
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_line scale_colour_manual theme_bw labs theme coord_trans
@@ -27,11 +23,16 @@
 #'                       interpolate = FALSE,
 #'                       show_warns = TRUE,
 #'                       noise_method = 'spectrum')
-#' 
-#' gg_pred(dat, type = "detrended")
-#' gg_pred(dat, type = "spectral")
+#'
+#' gg_envpred(dat, type = "detrended")
+#' gg_envpred(dat, type = "spectral")
 #' }
-gg_pred <- function(object, type = c("detrended", "spectral")) {
+#' @export
+gg_envpred <- function(object, type = c("detrended", "spectral")) {
+  if (missing(type)) {
+    type <- "detrended"
+  }
+
   switch(match.arg(type),
          "detrended" = {
            attr(object, "detrended_data") %>%

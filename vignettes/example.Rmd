@@ -38,18 +38,18 @@ sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
 The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods. The use can plot both the de-trended dataset,
 
 ```{r}
-gg_pred(sst_pred, type = "detrended")
+gg_envpred(sst_pred, type = "detrended")
 ```
 
 or the spectral density on the log 10 scale
 
 ```{r}
-gg_pred(sst_pred, type = "spectral")
+gg_envpred(sst_pred, type = "spectral")
 ```
 
 Finally, the package also handles temporally uneven NPP data
 with NAs (carefully check warnings), by using the Lomb-Scargle Periodogram from package
-[`lomb`](https://cran.r-project.org/web/packages/lomb/index.html).
+[`lomb`](https://CRAN.R-project.org/package=lomb).
 
 ```{r, warning = FALSE}
 npp_pred  <-  predictability(npp$time_series, npp$dates, delta = 8,

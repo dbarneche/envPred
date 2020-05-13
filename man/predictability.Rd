@@ -54,6 +54,50 @@ continuous chunks of NAs because the linear interpolation might introduce substa
 Also note that if \code{dates} starts and ends in different month of the year,
 some monthly means are estimated with relatively less precision.
 }
+\examples{
+library(envPred)
+data(sst)
+# all results return important
+# warning messages of which the user should be aware.
+# after double-checking that the data falls
+# within the recommended specs, set show_warns = FALSE
+predictability(sst$time_series,
+               sst$dates,
+               delta = 1,
+               is_uneven = FALSE,
+               interpolate = FALSE,
+               show_warns = TRUE,
+               noise_method = 'spectrum')
+predictability(sst$time_series,
+               sst$dates,
+               delta = 1,
+               is_uneven = FALSE,
+               interpolate = FALSE,
+               show_warns = TRUE,
+               noise_method = 'spectrum')
+predictability(sst$time_series,
+               sst$dates,
+               delta = 1,
+               is_uneven = FALSE,
+               interpolate = FALSE,
+               show_warns = TRUE,
+               noise_method = 'spectrum')
+data(npp)
+predictability(npp$time_series,
+               npp$dates,
+               delta = 8,
+               is_uneven = TRUE,
+               interpolate = FALSE,
+               show_warns = TRUE,
+               noise_method = 'lomb_scargle')
+predictability(npp$time_series,
+               npp$dates,
+               delta = 8,
+               is_uneven = TRUE,
+               interpolate = TRUE,
+               show_warns = TRUE,
+               noise_method = 'lomb_scargle')
+}
 \seealso{
 \code{\link{seasonality_calc}}, \code{\link{noise_calc}}, \code{\link{colwell74}}.
 }

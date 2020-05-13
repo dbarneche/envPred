@@ -11,7 +11,7 @@
 #' @param isUneven Is \code{rawTimeSeries} even or unevenly distributed in time? Default is \code{\link[base]{FALSE}}.
 #' @param interpolate Should a linear interpolation be applied to missing values in 
 #' \code{rawTimeSeries}? Irrelevant method if \code{isUneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.
-#' @param checkPlots Deprecated. Use newer \code{\link{gg_pred}} instead.
+#' @param checkPlots Deprecated. Use newer \code{\link{gg_envpred}} instead.
 #' @param showWarnings Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
 #' Strongly recommended for first time users.
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 

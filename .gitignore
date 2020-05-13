@@ -18,6 +18,7 @@
 *.xls*
 
 # package development
+envPred.Rcheck/
 envPred*tar.gz
 inst/doc
 inst/web
