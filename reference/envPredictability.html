@@ -6,7 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculates environmental predictability components — envPredictability • envPred</title>
+<title>Calculates environmental predictability components
+
+Environmental predictability components (deprecated).
+Use <code><a href='predictability.html'>predictability</a></code> instead. — envPredictability • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +49,13 @@
 
 
 
-<meta property="og:title" content="Calculates environmental predictability components — envPredictability" />
-<meta property="og:description" content="Environmental predictability components" />
+<meta property="og:title" content="Calculates environmental predictability components
+
+Environmental predictability components (deprecated).
+Use <code><a href='predictability.html'>predictability</a></code> instead. — envPredictability" />
+<meta property="og:description" content="Calculates environmental predictability components
+Environmental predictability components (deprecated).
+Use predictability instead." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +88,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">envPred</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -116,13 +124,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculates environmental predictability components</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/functions.R'><code>R/functions.R</code></a></small>
+    <h1>Calculates environmental predictability components
+
+Environmental predictability components (deprecated).
+Use <code><a href='predictability.html'>predictability</a></code> instead.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
     <div class="hidden name"><code>envPredictability.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Environmental predictability components</p>
+    <p>Calculates environmental predictability components</p>
+<p>Environmental predictability components (deprecated).
+Use <code><a href='predictability.html'>predictability</a></code> instead.</p>
     </div>
 
     <pre class="usage"><span class='fu'>envPredictability</span>(
@@ -164,8 +177,7 @@ a raw environmental time series.</p></td>
     </tr>
     <tr>
       <th>checkPlots</th>
-      <td><p>Should inspection plots be triggered? Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>. Not recommended
-if applying this task to multiple time series at once.</p></td>
+      <td><p>Deprecated. Use newer <code><a href='gg_pred.html'>gg_pred</a></code> instead.</p></td>
     </tr>
     <tr>
       <th>showWarnings</th>
@@ -183,64 +195,10 @@ values: <code>'spectrum'</code> for evenly distributed time series or
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> with environmental predictability components.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function currently allows for monthly-based seasonality calculation only.
-This algorithm adapts the steps described in <a href='http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract'>Marshall and Burgess (2015)</a> Ecology Letters 18: 1461–0248, doi: <a href='http://dx.doi.org/10.1111/ele.12402'>10.1111/ele.12402</a>.</p>
-<p>We advise caution for datasets in which <code>rawTimeSeries</code> contains NAs. Particularly,
-we strongly advise setting <code>interpolate = FALSE</code> for <code>rawTimeSeries</code> containing large
-continuous chunks of NAs because the linear interpolation might introduce substantial bias.</p>
-<p><a href='http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract'>Vasseur and Yodzis (2004)</a> Ecology 85: 1146-1152, doi: <a href='http://dx.doi.org/10.1890/02-3122'>10.1890/02-3122</a> recommend time series encompassing at least 128 months or approximately 10 years.</p>
-<p>Also note that if <code>datesVector</code> starts and ends in different month of the year,
-some monthly means are estimated with relatively less precision.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='envSeasonality.html'>envSeasonality</a></code>, <code><a href='envNoise.html'>envNoise</a></code>, <code><a href='colwell74.html'>colwell74</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='predictability.html'>predictability</a></code>.</p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>envPred</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sst</span>)
-<span class='co'># all results return important warning messages of which the user should be aware.</span>
-<span class='co'># after double-checking that the data falls within the recommended specs, set showWarnings = FALSE</span>
-<span class='fu'>envPredictability</span>(<span class='no'>sst</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>sst</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'spectrum'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is January and ending month is December</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays   frequency
-#&gt; 1         4017      0             0       11        12    4017 0.000497884
-#&gt;   nyquistFrequency  rawMean rawVariance     rawCV predictedVariance
-#&gt; 1              0.5 23.09039    5.109123 0.0978908          4.089987
-#&gt;   unpredictedVariance unBoundedSeasonality boundedSeasonality
-#&gt; 1           0.7072908              5.78261          0.8525641
-#&gt;   environmentalColor
-#&gt; 1           1.716807</div><div class='input'><span class='fu'>envPredictability</span>(<span class='no'>sst</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>sst</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'spectrum'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is January and ending month is December</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays   frequency
-#&gt; 1         4017      0             0       11        12    4017 0.000497884
-#&gt;   nyquistFrequency  rawMean rawVariance     rawCV predictedVariance
-#&gt; 1              0.5 23.09039    5.109123 0.0978908          4.089987
-#&gt;   unpredictedVariance unBoundedSeasonality boundedSeasonality
-#&gt; 1           0.7072908              5.78261          0.8525641
-#&gt;   environmentalColor
-#&gt; 1           1.716807</div><div class='input'><span class='fu'>envPredictability</span>(<span class='no'>sst</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>sst</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'spectrum'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is January and ending month is December</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays   frequency
-#&gt; 1         4017      0             0       11        12    4017 0.000497884
-#&gt;   nyquistFrequency  rawMean rawVariance     rawCV predictedVariance
-#&gt; 1              0.5 23.09039    5.109123 0.0978908          4.089987
-#&gt;   unpredictedVariance unBoundedSeasonality boundedSeasonality
-#&gt; 1           0.7072908              5.78261          0.8525641
-#&gt;   environmentalColor
-#&gt; 1           1.716807</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>npp</span>)
-<span class='fu'>envPredictability</span>(<span class='no'>npp</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>npp</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'LombScargle'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Data contains NAs, we strongly advise setting "interpolate = FALSE" for rawTimeSeries containing large continuous chunks of NAs</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots56.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots57.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots58.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
-#&gt; 1          465     58     0.1247312       12        12     465 0.0005376344
-#&gt;   nyquistFrequency  rawMean rawVariance     rawCV predictedVariance
-#&gt; 1           0.0625 485.0939    14448.82 0.2477938          4536.062
-#&gt;   unpredictedVariance unBoundedSeasonality boundedSeasonality
-#&gt; 1            9541.714            0.4753928          0.3222144
-#&gt;   environmentalColor
-#&gt; 1           0.538234</div><div class='input'><span class='fu'>envPredictability</span>(<span class='no'>npp</span>$<span class='no'>rawTimeSeries</span>, <span class='no'>npp</span>$<span class='no'>datesVector</span>, <span class='kw'>delta</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>isUneven</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>checkPlots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>noiseMethod</span> <span class='kw'>=</span> <span class='st'>'LombScargle'</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
-#&gt; <span class='message'>  method            from</span>
-#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; <span class='warning'>Warning: Time series starts and ends at different times of the year. Starting month is September and ending month is January</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots59.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots60.pdf")</span></div><div class='output co'>#&gt; <span class='message'>dev.new(): using pdf(file="Rplots61.pdf")</span></div><div class='output co'>#&gt;   seriesLength nOfNAs proportionNAs nOfYears nOfMonths nOfDays    frequency
-#&gt; 1          465     58     0.1247312       12        12     465 0.0005376344
-#&gt;   nyquistFrequency  rawMean rawVariance    rawCV predictedVariance
-#&gt; 1           0.0625 481.6442    13741.58 0.243384          4530.895
-#&gt;   unpredictedVariance unBoundedSeasonality boundedSeasonality
-#&gt; 1             8925.82            0.5076167          0.3367014
-#&gt;   environmentalColor
-#&gt; 1           0.585307</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

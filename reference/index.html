@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">envPred</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -151,45 +151,64 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
       </tr><tr>
         
         <td>
-          <p><code><a href="envNoise.html">envNoise()</a></code> </p>
+          <p><code><a href="detrend_and_bin.html">detrend_and_bin()</a></code> </p>
         </td>
-        <td><p>Calculate the 'color' of the noise of unpredicted detrended residuals</p></td>
+        <td><p>Binds output from <code>linear_detrend</code> and
+<code>monthly_bins</code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="envPredictability.html">envPredictability()</a></code> </p>
         </td>
-        <td><p>Calculates environmental predictability components</p></td>
+        <td><p>Calculates environmental predictability components
+
+Environmental predictability components (deprecated).
+Use <code>predictability</code> instead.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="envPredictabilityAndColwell.html">envPredictabilityAndColwell()</a></code> </p>
         </td>
-        <td><p>Calculates environmental predictability components and Colwell (1974) metric</p></td>
+        <td><p>Calculates environmental predictability components and Colwell (1974) metric
+
+Environmental predictability components (deprecated).
+Use <code>predictability_and_colwell</code> instead.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="envSeasonality.html">envSeasonality()</a></code> </p>
+          <p><code><a href="gg_pred.html">gg_pred()</a></code> </p>
         </td>
-        <td><p>Calculate the 'color' of unpredicted detrended residuals</p></td>
+        <td><p>Plot predictability object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="extractSpectrumSlope.html">extractSpectrumSlope()</a></code> </p>
+          <p><code><a href="is_predictability.html">is_predictability()</a></code> </p>
         </td>
-        <td><p>Calculate the 'color' of environmental noise assuming 1/f noise family</p></td>
+        <td><p>Checks if argument is a <code>predictability</code> object</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="linearDetrending.html">linearDetrending()</a></code> </p>
+          <p><code><a href="linear_detrend.html">linear_detrend()</a></code> </p>
         </td>
         <td><p>Linear detrending of time series</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="monthlyBinning.html">monthlyBinning()</a></code> </p>
+          <p><code><a href="lmb_output_prep.html">lmb_output_prep()</a></code> </p>
+        </td>
+        <td><p>Calculates and renames output of Lomb-Scargle Periodogram</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="monthly_bins.html">monthly_bins()</a></code> </p>
         </td>
         <td><p>Compute the seasonal (monthly) components of time series</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="noise_calc.html">noise_calc()</a></code> </p>
+        </td>
+        <td><p>Calculate the 'colour' of the noise of unpredicted de-trended residuals</p></td>
       </tr><tr>
         
         <td>
@@ -199,15 +218,33 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
       </tr><tr>
         
         <td>
-          <p><code><a href="prepareLombScargleOutput.html">prepareLombScargleOutput()</a></code> </p>
+          <p><code><a href="predictability.html">predictability()</a></code> </p>
         </td>
-        <td><p>Calculates and renames output of Lomb-Scargle Periodogram</p></td>
+        <td><p>Calculates environmental predictability components</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="prepareSpectrumOutput.html">prepareSpectrumOutput()</a></code> </p>
+          <p><code><a href="predictability_and_colwell.html">predictability_and_colwell()</a></code> </p>
+        </td>
+        <td><p>Calculates environmental predictability components and Colwell (1974) metric</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="seasonality_calc.html">seasonality_calc()</a></code> </p>
+        </td>
+        <td><p>Calculate the 'colour' of unpredicted de-trended residuals</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="spec_output_prep.html">spec_output_prep()</a></code> </p>
         </td>
         <td><p>Calculates and renames output of Spectrum Periodogram</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="spec_slope_get.html">spec_slope_get()</a></code> </p>
+        </td>
+        <td><p>Calculate the 'colour' of environmental noise assuming 1/f noise family</p></td>
       </tr><tr>
         
         <td>

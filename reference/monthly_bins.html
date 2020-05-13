@@ -6,11 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information. — colwell74 • envPred</title>
+<title>Compute the seasonal (monthly) components of time series — monthly_bins • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -50,12 +46,8 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
 
 
 
-<meta property="og:title" content="Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information. — colwell74" />
-<meta property="og:description" content="Predictability from Colwell (1974)" />
+<meta property="og:title" content="Compute the seasonal (monthly) components of time series — monthly_bins" />
+<meta property="og:description" content="Compute the seasonal (monthly) components of time series" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -124,66 +116,45 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/colwell.R'><code>R/colwell.R</code></a></small>
-    <div class="hidden name"><code>colwell74.Rd</code></div>
+    <h1>Compute the seasonal (monthly) components of time series</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>monthly_bins.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Predictability from Colwell (1974)</p>
+    <p>Compute the seasonal (monthly) components of time series</p>
     </div>
 
-    <pre class="usage"><span class='fu'>colwell74</span>(<span class='no'>time_series</span>, <span class='no'>dates</span>, <span class='kw'>n_states</span> <span class='kw'>=</span> <span class='fl'>11</span>)</pre>
+    <pre class="usage"><span class='fu'>monthly_bins</span>(<span class='no'>resids</span>, <span class='no'>dates</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>time_series</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing
-a raw environmental time series.</p></td>
+      <th>resids</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing the residual
+variation of a raw time series after removing the linear trend.</p></td>
     </tr>
     <tr>
       <th>dates</th>
-      <td><p>An vector of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
+      <td><p>An object of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
 (must be in progressive chronological order).</p></td>
-    </tr>
-    <tr>
-      <th>n_states</th>
-      <td><p>is a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector of length 1 containing
-a somewhat arbitrary number, as Colwell's method divides a continuous variable
-up into discrete states. Default (arbitrary) is 11. See Details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> with three environmental predictability components:
-constancy (<code>colwell_c</code>), contingency (<code>colwell_m</code>) and predictability (<code>colwell_p</code>).
-Constancy (C) measures the extent to which the environment is the same for all months in all years.
-Contingency (M) measures the extent to which the environmental differences between months are the same
-in all years. Predictability (P) is the sum of Constancy (C) and Contingency (M). Maximum predictability
-can be attained as a consequence of either complete constancy, complete contingency, or a combination
-of constancy and contingency.</p>
+    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> containing the a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code>
+vector containing predicted (interpolated) de-trended residuals (<code>'interpolated_seasons'</code>), and
+a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing unpredicted de-trended residuals
+<code>'resid_time_series'</code>. See details.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This algorithm implements the methods described in <a href='http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract'>Colwell (1974)</a> Ecology 55: 1148–1153, doi: <a href='http://dx.doi.org/10.2307/1940366'>10.2307/1940366</a>.</p>
+    <p>This algorithm follows the steps described in <a href='http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract'>Marshall and Burgess 2015</a> Ecology Letters 18: 1461–0248, doi: <a href='http://dx.doi.org/10.1111/ele.12402'>10.1111/ele.12402</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='predictability.html'>predictability</a></code>.</p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>envPred</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sst</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>npp</span>)
-<span class='no'>n_states</span> <span class='kw'>&lt;-</span> <span class='fl'>11</span>
-<span class='fu'>colwell74</span>(<span class='no'>sst</span>$<span class='no'>time_series</span>, <span class='no'>sst</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;    colwell_c colwell_m colwell_p
-#&gt; 1 0.03052538 0.4583633 0.4888887</div><div class='input'><span class='fu'>colwell74</span>(<span class='no'>npp</span>$<span class='no'>time_series</span>, <span class='no'>npp</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;   colwell_c colwell_m colwell_p
-#&gt; 1 0.1131317 0.3111578 0.4242895</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

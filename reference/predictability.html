@@ -6,11 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information. — colwell74 • envPred</title>
+<title>Calculates environmental predictability components — predictability • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -50,12 +46,8 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
 
 
 
-<meta property="og:title" content="Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information. — colwell74" />
-<meta property="og:description" content="Predictability from Colwell (1974)" />
+<meta property="og:title" content="Calculates environmental predictability components — predictability" />
+<meta property="og:description" content="Environmental predictability components" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -124,20 +116,24 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/colwell.R'><code>R/colwell.R</code></a></small>
-    <div class="hidden name"><code>colwell74.Rd</code></div>
+    <h1>Calculates environmental predictability components</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/predictability.R'><code>R/predictability.R</code></a></small>
+    <div class="hidden name"><code>predictability.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Predictability from Colwell (1974)</p>
+    <p>Environmental predictability components</p>
     </div>
 
-    <pre class="usage"><span class='fu'>colwell74</span>(<span class='no'>time_series</span>, <span class='no'>dates</span>, <span class='kw'>n_states</span> <span class='kw'>=</span> <span class='fl'>11</span>)</pre>
+    <pre class="usage"><span class='fu'>predictability</span>(
+  <span class='no'>time_series</span>,
+  <span class='no'>dates</span>,
+  <span class='no'>delta</span>,
+  <span class='kw'>is_uneven</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>show_warns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>noise_method</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,41 +145,52 @@ a raw environmental time series.</p></td>
     </tr>
     <tr>
       <th>dates</th>
-      <td><p>An vector of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
-(must be in progressive chronological order).</p></td>
+      <td><p>An vector of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code>
+of format YYYY-MM-DD (must be in progressive chronological order).</p></td>
     </tr>
     <tr>
-      <th>n_states</th>
-      <td><p>is a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector of length 1 containing
-a somewhat arbitrary number, as Colwell's method divides a continuous variable
-up into discrete states. Default (arbitrary) is 11. See Details.</p></td>
+      <th>delta</th>
+      <td><p>Time interval (any unit) of <code>time_series</code>.</p></td>
+    </tr>
+    <tr>
+      <th>is_uneven</th>
+      <td><p>Is <code>time_series</code> even or unevenly distributed in time? Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>interpolate</th>
+      <td><p>Should a linear interpolation be applied to missing values in
+<code>time_series</code>? Irrelevant method if <code>is_uneven</code> is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>. Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>show_warns</th>
+      <td><p>Should cautionary warning messages be displayed? Default is <code><a href='https://rdrr.io/r/base/logical.html'>TRUE</a></code>.
+Strongly recommended for first time users.</p></td>
+    </tr>
+    <tr>
+      <th>noise_method</th>
+      <td><p>A method for estimating the slope beta. Takes 2 possible
+values: <code>'spectrum'</code> for evenly distributed time series or
+<code>'lomb_scargle'</code> for unevenly distributed ones.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> with three environmental predictability components:
-constancy (<code>colwell_c</code>), contingency (<code>colwell_m</code>) and predictability (<code>colwell_p</code>).
-Constancy (C) measures the extent to which the environment is the same for all months in all years.
-Contingency (M) measures the extent to which the environmental differences between months are the same
-in all years. Predictability (P) is the sum of Constancy (C) and Contingency (M). Maximum predictability
-can be attained as a consequence of either complete constancy, complete contingency, or a combination
-of constancy and contingency.</p>
+    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> with environmental predictability components.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This algorithm implements the methods described in <a href='http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract'>Colwell (1974)</a> Ecology 55: 1148–1153, doi: <a href='http://dx.doi.org/10.2307/1940366'>10.2307/1940366</a>.</p>
+    <p>This function currently allows for monthly-based seasonality calculation only.
+This algorithm adapts the steps described in <a href='http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract'>Marshall and Burgess (2015)</a> Ecology Letters 18: 1461–0248, doi: <a href='http://dx.doi.org/10.1111/ele.12402'>10.1111/ele.12402</a>.</p>
+<p>We advise caution for datasets in which <code>time_series</code> contains NAs. Particularly,
+we strongly advise setting <code>interpolate = FALSE</code> for <code>time_series</code> containing large
+continuous chunks of NAs because the linear interpolation might introduce substantial bias.</p>
+<p><a href='http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract'>Vasseur and Yodzis (2004)</a> Ecology 85: 1146-1152, doi: <a href='http://dx.doi.org/10.1890/02-3122'>10.1890/02-3122</a> recommend time series encompassing at least 128 months or approximately 10 years.</p>
+<p>Also note that if <code>dates</code> starts and ends in different month of the year,
+some monthly means are estimated with relatively less precision.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='predictability.html'>predictability</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='seasonality_calc.html'>seasonality_calc</a></code>, <code><a href='noise_calc.html'>noise_calc</a></code>, <code><a href='colwell74.html'>colwell74</a></code>.</p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>envPred</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sst</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>npp</span>)
-<span class='no'>n_states</span> <span class='kw'>&lt;-</span> <span class='fl'>11</span>
-<span class='fu'>colwell74</span>(<span class='no'>sst</span>$<span class='no'>time_series</span>, <span class='no'>sst</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;    colwell_c colwell_m colwell_p
-#&gt; 1 0.03052538 0.4583633 0.4888887</div><div class='input'><span class='fu'>colwell74</span>(<span class='no'>npp</span>$<span class='no'>time_series</span>, <span class='no'>npp</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;   colwell_c colwell_m colwell_p
-#&gt; 1 0.1131317 0.3111578 0.4242895</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
