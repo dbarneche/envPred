@@ -162,16 +162,14 @@ noise_calc <- function(resid_time_series, predictor,
 #' @details This algorithm follows the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess 2015} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 #' @author Diego Barneche and Scott Burgess.
 #' @seealso \code{\link{predictability}}.
-#' @importFrom noaaErddap findLastDayOfTheMonth
 #' @importFrom stats aggregate approxfun median
 monthly_bins <- function(resids, dates) {
-  fct <- findLastDayOfTheMonth
   month_av_res_yrs <- aggregate(resids, by = list(format(dates, format = "%B")),
                                 mean, na.rm = TRUE)
   daily_dummy_ts <- seq.Date(from = as.Date(format(dates[1],
                                                    format = "1 %B %Y"),
                                             format = "%d %B %Y"),
-                             to = as.Date(fct(dates[length(dates)])),
+                             to = last_day(dates[length(dates)]),
                              by = "day")
   dummy_ts_m_y <- format(daily_dummy_ts, format = "%B %Y")
   med_month_yrs <- aggregate(daily_dummy_ts, by = list(dummy_ts_m_y), median)
@@ -191,4 +189,17 @@ monthly_bins <- function(resids, dates) {
   data.frame(resid_time_series = resid_time_series,
              interpolated_seasons = interpolated_seasons,
              stringsAsFactors = FALSE)
+}
+
+#' Compute last day of the month
+#'
+#' @title Compute last day of the month
+#' @param x An object of class \code{\link[base]{Date}} of format YYYY-MM-DD
+#' (must be in progressive chronological order).
+#' @return An object of class \code{\link[base]{Date}} of format YYYY-MM-DD.
+#' @author Diego Barneche and Scott Burgess.
+#' @seealso \code{\link{monthly_bins}}.
+#' @importFrom lubridate ceiling_date days
+last_day <- function(x) {
+  ceiling_date(x[length(x)], "month") - days(1)
 }
