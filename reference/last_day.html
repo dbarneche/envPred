@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • envPred</title>
+<title>Compute last day of the month — last_day • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Compute last day of the month — last_day" />
+<meta property="og:description" content="Compute last day of the month" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -125,155 +126,37 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Compute last day of the month</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>last_day.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Compute last day of the month</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>last_day</span>(<span class='no'>x</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="colwell74.html">colwell74()</a></code> </p>
-        </td>
-        <td><p>Calculates Constancy (C), Contingency (M), and Predictability (P) metrics from Colwell (1974)
-for seasonally varying environmental data. Can be applied to any phenomenon known or suspected to be
-periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
-cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
-matrix with months as columns, and states as rows. See Colwell (1974) for more information.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="detrend_and_bin.html">detrend_and_bin()</a></code> </p>
-        </td>
-        <td><p>Binds output from <code>linear_detrend</code> and
-<code>monthly_bins</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="envPredictability.html">envPredictability()</a></code> </p>
-        </td>
-        <td><p>Calculates environmental predictability components
-
-Environmental predictability components (deprecated).
-Use <code>predictability</code> instead.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="envPredictabilityAndColwell.html">envPredictabilityAndColwell()</a></code> </p>
-        </td>
-        <td><p>Calculates environmental predictability components and Colwell (1974) metric
-
-Environmental predictability components (deprecated).
-Use <code>predictability_and_colwell</code> instead.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gg_envpred.html">gg_envpred()</a></code> </p>
-        </td>
-        <td><p>Plot predictability object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_predictability.html">is_predictability()</a></code> </p>
-        </td>
-        <td><p>Checks if argument is a <code>predictability</code> object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="last_day.html">last_day()</a></code> </p>
-        </td>
-        <td><p>Compute last day of the month</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_detrend.html">linear_detrend()</a></code> </p>
-        </td>
-        <td><p>Linear detrending of time series</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lmb_output_prep.html">lmb_output_prep()</a></code> </p>
-        </td>
-        <td><p>Calculates and renames output of Lomb-Scargle Periodogram</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="monthly_bins.html">monthly_bins()</a></code> </p>
-        </td>
-        <td><p>Compute the seasonal (monthly) components of time series</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="noise_calc.html">noise_calc()</a></code> </p>
-        </td>
-        <td><p>Calculate the 'colour' of the noise of unpredicted de-trended residuals</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="npp.html">npp</a></code> </p>
-        </td>
-        <td><p>Net Primary Productivity (NPP) Time Series (1997-09-10 - 2008-01-05)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="predictability.html">predictability()</a></code> </p>
-        </td>
-        <td><p>Calculates environmental predictability components</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="predictability_and_colwell.html">predictability_and_colwell()</a></code> </p>
-        </td>
-        <td><p>Calculates environmental predictability components and Colwell (1974) metric</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="seasonality_calc.html">seasonality_calc()</a></code> </p>
-        </td>
-        <td><p>Calculate the 'colour' of unpredicted de-trended residuals</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="spec_output_prep.html">spec_output_prep()</a></code> </p>
-        </td>
-        <td><p>Calculates and renames output of Spectrum Periodogram</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="spec_slope_get.html">spec_slope_get()</a></code> </p>
-        </td>
-        <td><p>Calculate the 'colour' of environmental noise assuming 1/f noise family</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sst.html">sst</a></code> </p>
-        </td>
-        <td><p>Sea Surface Temperature (SST) Time Series (1997-01-01 - 2007-12-31)</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An object of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
+(must be in progressive chronological order).</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='monthly_bins.html'>monthly_bins</a></code>.</p></div>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
