@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/dbarneche/envPred/branch/master/graph/badge.svg)
 status](https://ci.appveyor.com/api/projects/status/github/dbarneche/envPred?branch=master&svg=true)](https://ci.appveyor.com/project/dbarneche/envPred)
 ![pkgdown](https://github.com/dbarneche/envPred/workflows/pkgdown/badge.svg)
 [![packageversion](https://img.shields.io/badge/Package%20version-1.0.1-orange.svg)](commits/master)
-[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 <!-- badges: end -->
 
 `envPred` is an R package that calculates two components of
