@@ -57,6 +57,16 @@ Authors
 Dr. Diego Barneche (Australian Institute of Marine Science) and
 Dr. Scott Burgess (Florida State University Tallahassee)
 
+Further Information
+-------------------
+
+Further information about `envPred`, including vignettes and help files,
+can be seen on the on-line [project
+page](https://dbarneche.github.io/envPred).
+
+This R package is provided for use under the MIT License
+([MIT](http://opensource.org/licenses/MIT)) by the authors.
+
 Bug reporting
 -------------
 

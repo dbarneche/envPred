@@ -31,7 +31,7 @@ version <- gsub("-", ".", version)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dbarneche/envPred?branch=master&svg=true)](https://ci.appveyor.com/project/dbarneche/envPred)
 ![pkgdown](https://github.com/dbarneche/envPred/workflows/pkgdown/badge.svg)
 [![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg)](commits/master)
-[![license](https://img.shields.io/badge/license-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![license](https://img.shields.io/badge/license-MIT + file LICENSE-lightgrey.svg)](https://choosealicense.com/)
 <!-- badges: end -->
 
 `envPred` is an R package that calculates two components of environmental predictability out of environmental time series (e.g. temperature, productivity, rainfall, etc.).
@@ -57,6 +57,12 @@ The following sample data were obtained using the [noaaErddap](https://github.co
 ## Authors
 
 Dr. Diego Barneche (Australian Institute of Marine Science) and Dr. Scott Burgess (Florida State University Tallahassee)
+
+## Further Information
+
+Further information about `envPred`, including vignettes and help files, can be seen on the on-line [project page](https://dbarneche.github.io/envPred).
+
+This R package is provided for use under the MIT License ([MIT](http://opensource.org/licenses/MIT)) by the authors.
 
 ## Bug reporting
 
