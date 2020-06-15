@@ -28,7 +28,8 @@ test_that("Simple corner cases", {
 
     # characters not allowed for date vector
     expect_is(fct(sst$time_series, as.character(sst$dates)), "data.frame")
-    expect_false(all(fct(sst$time_series, as.character(sst$dates)) == fct(sst$time_series, sst$dates)))
+    expect_error(fct(as.character(sst$time_series), sst$dates))
+    expect_error(expect_identical(fct(sst$time_series, as.character(sst$dates)), fct(sst$time_series, sst$dates)))
 
     # vectors have different lengths
     expect_error(fct(sst$time_series[1:100], sst$dates))
