@@ -137,12 +137,3 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
   class(out) <- append(class(out), "predictability")
   out
 }
-
-#' Checks if argument is a \code{predictability} object
-#' 
-#' @param x An \R object
-#' 
-#' @export
-is_predictability <- function(x) {
-  inherits(x, "predictability")
-}

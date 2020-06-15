@@ -203,3 +203,12 @@ monthly_bins <- function(resids, dates) {
 last_day <- function(x) {
   ceiling_date(x[length(x)], "month") - days(1)
 }
+
+#' Checks if argument is a \code{predictability} object
+#' 
+#' @param x An \R object
+#' 
+#' @export
+is_predictability <- function(x) {
+  inherits(x, "predictability")
+}
