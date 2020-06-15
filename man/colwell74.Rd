@@ -14,12 +14,13 @@ colwell74(time_series, dates, n_states = 11)
 \item{time_series}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
-\item{dates}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD
-(must be in progressive chronological order).}
+\item{dates}{An vector of class \code{\link[base]{Date}}
+of format YYYY-MM-DD (must be in progressive chronological order).}
 
 \item{n_states}{is a \code{\link[base]{numeric}} vector of length 1 containing
 a somewhat arbitrary number, as Colwell's method divides a continuous variable
-up into discrete states. Default (arbitrary) is 11. See Details.}
+up into discrete states. Default (arbitrary) is 11. See \code{\link{colwell74}}
+for Details.}
 }
 \value{
 A \code{\link[base]{data.frame}} with three environmental predictability components:

@@ -10,8 +10,8 @@ predictability_and_colwell(time_series, dates, n_states, ...)
 \item{time_series}{A \code{\link[base]{numeric}} vector containing
 a raw environmental time series.}
 
-\item{dates}{An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD
-(must be in progressive chronological order).}
+\item{dates}{An vector of class \code{\link[base]{Date}}
+of format YYYY-MM-DD (must be in progressive chronological order).}
 
 \item{n_states}{is a \code{\link[base]{numeric}} vector of length 1 containing
 a somewhat arbitrary number, as Colwell's method divides a continuous variable

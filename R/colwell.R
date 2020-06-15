@@ -1,10 +1,9 @@
 #' Environmental predictability components
 #'
 #' @title Calculates environmental predictability components and Colwell (1974) metric
-#' @param time_series A \code{\link[base]{numeric}} vector containing 
-#' a raw environmental time series.
-#' @param dates An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
-#' (must be in progressive chronological order).
+#' 
+#' @inheritParams predictability
+#' 
 #' @param n_states is a \code{\link[base]{numeric}} vector of length 1 containing 
 #' a somewhat arbitrary number, as Colwell's method divides a continuous variable
 #' up into discrete states. Default (arbitrary) is 11. See \code{\link{colwell74}}
@@ -29,13 +28,9 @@ predictability_and_colwell <- function(time_series, dates, n_states, ...) {
 #' periodic or cyclic in time which can be scored for at least two states. Scores from each month in the
 #' cycle are then collected for as many complete cycles as possible, and the data cast as a frequency
 #' matrix with months as columns, and states as rows. See Colwell (1974) for more information.
-#' @param time_series A \code{\link[base]{numeric}} vector containing 
-#' a raw environmental time series.
-#' @param dates An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
-#' (must be in progressive chronological order).
-#' @param n_states is a \code{\link[base]{numeric}} vector of length 1 containing 
-#' a somewhat arbitrary number, as Colwell's method divides a continuous variable
-#' up into discrete states. Default (arbitrary) is 11. See Details.
+#' 
+#' @inheritParams predictability_and_colwell
+#' 
 #' @details This algorithm implements the methods described in \href{http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract}{Colwell (1974)} Ecology 55: 1148–1153, doi: \href{http://dx.doi.org/10.2307/1940366}{10.2307/1940366}.
 #' @return A \code{\link[base]{data.frame}} with three environmental predictability components:
 #' constancy (\code{colwell_c}), contingency (\code{colwell_m}) and predictability (\code{colwell_p}).
