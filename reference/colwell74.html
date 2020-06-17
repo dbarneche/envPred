@@ -149,7 +149,7 @@ matrix with months as columns, and states as rows. See Colwell (1974) for more i
     <p>Predictability from Colwell (1974)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>colwell74</span>(<span class='no'>time_series</span>, <span class='no'>dates</span>, <span class='kw'>n_states</span> <span class='kw'>=</span> <span class='fl'>11</span>)</pre>
+    <pre class="usage"><span class='fu'>colwell74</span>(<span class='kw'>time_series</span>, <span class='kw'>dates</span>, n_states = <span class='fl'>11</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,18 +187,18 @@ of constancy and contingency.</p>
     <p>This algorithm implements the methods described in <a href='http://onlinelibrary.wiley.com/doi/10.2307/1940366/abstract'>Colwell (1974)</a> Ecology 55: 1148–1153, doi: <a href='http://dx.doi.org/10.2307/1940366'>10.2307/1940366</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='predictability.html'>predictability</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/predictability.html'>predictability</a></code>.</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Diego Barneche and Scott Burgess.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>envPred</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>sst</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>npp</span>)
-<span class='no'>n_states</span> <span class='kw'>&lt;-</span> <span class='fl'>11</span>
-<span class='fu'>colwell74</span>(<span class='no'>sst</span>$<span class='no'>time_series</span>, <span class='no'>sst</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;    colwell_c colwell_m colwell_p
-#&gt; 1 0.03052538 0.4583633 0.4888887</div><div class='input'><span class='fu'>colwell74</span>(<span class='no'>npp</span>$<span class='no'>time_series</span>, <span class='no'>npp</span>$<span class='no'>dates</span>, <span class='no'>n_states</span>)</div><div class='output co'>#&gt;   colwell_c colwell_m colwell_p
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/dbarneche/envPred'>envPred</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>sst</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>npp</span>)
+<span class='kw'>n_states</span> <span class='op'>&lt;-</span> <span class='fl'>11</span>
+<span class='fu'><a href='https://rdrr.io/pkg/envPred/man/colwell74.html'>colwell74</a></span>(<span class='kw'>sst</span><span class='op'>$</span><span class='kw'>time_series</span>, <span class='kw'>sst</span><span class='op'>$</span><span class='kw'>dates</span>, <span class='kw'>n_states</span>)</div><div class='output co'>#&gt;    colwell_c colwell_m colwell_p
+#&gt; 1 0.03052538 0.4583633 0.4888887</div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/colwell74.html'>colwell74</a></span>(<span class='kw'>npp</span><span class='op'>$</span><span class='kw'>time_series</span>, <span class='kw'>npp</span><span class='op'>$</span><span class='kw'>dates</span>, <span class='kw'>n_states</span>)</div><div class='output co'>#&gt;   colwell_c colwell_m colwell_p
 #&gt; 1 0.1131317 0.3111578 0.4242895</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

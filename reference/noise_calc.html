@@ -137,10 +137,10 @@
     <p>Calculate environmental noise</p>
     </div>
 
-    <pre class="usage"><span class='fu'>noise_calc</span>(
-  <span class='no'>resid_time_series</span>,
-  <span class='no'>predictor</span>,
-  <span class='kw'>noise_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"spectrum"</span>, <span class='st'>"lomb_scargle"</span>)
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/noise_calc.html'>noise_calc</a></span>(
+  <span class='kw'>resid_time_series</span>,
+  <span class='kw'>predictor</span>,
+  noise_method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"spectrum"</span>, <span class='st'>"lomb_scargle"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -149,7 +149,7 @@
     <tr>
       <th>resid_time_series</th>
       <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing unpredicted
-de-trended residuals as obtained by function <code><a href='monthly_bins.html'>monthly_bins</a></code>.</p></td>
+de-trended residuals as obtained by function <code><a href='https://rdrr.io/pkg/envPred/man/monthly_bins.html'>monthly_bins</a></code>.</p></td>
     </tr>
     <tr>
       <th>predictor</th>
@@ -170,10 +170,10 @@ values: <code>'spectrum'</code> for evenly distributed time series or
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function calculates beta slope (assuming 1/f noise family) on the
-residual time series using function <code><a href='spec_slope_get.html'>spec_slope_get</a></code>.</p>
+residual time series using function <code><a href='https://rdrr.io/pkg/envPred/man/spec_slope_get.html'>spec_slope_get</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='monthly_bins.html'>monthly_bins</a></code>, <code><a href='predictability.html'>predictability</a></code>, <code><a href='spec_slope_get.html'>spec_slope_get</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/monthly_bins.html'>monthly_bins</a></code>, <code><a href='https://rdrr.io/pkg/envPred/man/predictability.html'>predictability</a></code>, <code><a href='https://rdrr.io/pkg/envPred/man/spec_slope_get.html'>spec_slope_get</a></code>.</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Diego Barneche and Scott Burgess.</p>
