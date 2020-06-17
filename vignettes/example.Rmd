@@ -56,3 +56,19 @@ npp_pred  <-  predictability(npp$time_series, npp$dates, delta = 8,
                              is_uneven = TRUE, interpolate = TRUE,
                              show_warns = TRUE, noise_method = "lomb_scargle")
 ```
+
+To obtain Colwell's metrics, simply run:
+
+```{r}
+colwell74(sst$time_series, sst$dates, n_states = 11)
+```
+
+The argument `n_states` is a numeric vector of length 1 containing a somewhat arbitrary number, as Colwell's method divides a continuous variable up into discrete states (read the original [paper](http://onlinelibrary.wiley.com/doi/10.2307/1940366/) for further details). Default (arbitrary) is 11.
+
+The package also has a wrapper function that binds the output of `predictability` and `colwell74` together:
+
+```{r, warning = FALSE}
+all_pred_sst  <-  predictability_and_colwell(sst$time_series, sst$dates, n_states = 11, delta = 1,
+                                             is_uneven = FALSE, interpolate = FALSE,
+                                             show_warns = TRUE, noise_method = "spectrum")
+```
