@@ -6,7 +6,8 @@ data(npp)
 
 # introduce NAs in complete SST series
 sst2  <-  sst
-sst2$time_series[sample(seq_len(nrow(sst2)), 50)]  <-  NA
+set.seed(10)
+sst2$time_series[sample(seq_len(nrow(sst2)), 600)]  <-  NA
 
 # copy of time series starting and ending at the same day different years
 sst3  <-  sst[1:which(sst$dates == as.Date("2007-01-01")), ]
@@ -27,7 +28,7 @@ test_that("Simple corner cases", {
     expect_is(colwell74(sst$time_series, sst$dates, n_states), "data.frame")
     expect_length(colwell74(sst$time_series, sst$dates, n_states), 3)
     expect_length(colwell74(npp$time_series, npp$dates, n_states), 3)
-    expect_false(any(colwell74(sst$time_series, sst$dates, n_states) == colwell74(sst2$time_series, sst2$dates, n_states)))
+    expect_false(all(colwell74(sst$time_series, sst$dates, n_states) == colwell74(sst2$time_series, sst2$dates, n_states)))
     
     # characters allowed for date vector
     expect_is(colwell74(sst$time_series, as.character(sst$dates), 2), "data.frame")
