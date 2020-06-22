@@ -100,8 +100,8 @@ Available data sources in envPred
 ---------------------------------
 
 `envPred` provides two test datasets for the user to understand the
-behaviour and output of package functions: sst (Sea Surface
-Temperature), and npp (ocean Net Primary Productivity). The former
+behaviour and output of package functions: `sst` (Sea Surface
+Temperature), and `npp` (ocean Net Primary Productivity). The former
 contains evenly, complete distributed data at a daily interval; the
 latter contains unevenly, incomplete (i.e. missing data) data. Both
 sample datasets were obtained from a random coordinate using the
