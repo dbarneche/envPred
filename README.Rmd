@@ -55,7 +55,7 @@ Then install `envPred` using the following:
 
 ## Available data sources in envPred
 
-`envPred` provides two test datasets for the user to understand the behaviour and output of package functions: sst (Sea Surface Temperature), and npp (ocean Net Primary Productivity). The former contains evenly, complete distributed data at a daily interval; the latter contains unevenly, incomplete (i.e. missing data) data. Both sample datasets were obtained from a random coordinate using the [noaaErddap](https://github.com/dbarneche/noaaErddap/) R package:
+`envPred` provides two test datasets for the user to understand the behaviour and output of package functions: `sst` (Sea Surface Temperature), and `npp` (ocean Net Primary Productivity). The former contains evenly, complete distributed data at a daily interval; the latter contains unevenly, incomplete (i.e. missing data) data. Both sample datasets were obtained from a random coordinate using the [noaaErddap](https://github.com/dbarneche/noaaErddap/) R package:
 
 * [Net Primary Productivity (NPP) data](http://coastwatch.pfeg.noaa.gov/erddap/griddap/erdPPbfp18day.html)
 * [Sea Surface Temperature (SST)](http://www.esrl.noaa.gov/psd/data/gridded/data.noaa.oisst.v2.highres.html)
