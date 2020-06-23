@@ -72,7 +72,7 @@ package if the time series is unevenly distributed ([Glynn et
 al. 2006](https://academic.oup.com/bioinformatics/article/22/3/310/220284)).
 
 Constancy, contingency and predictability are calculated following
-[Colwell (1974)](http://onlinelibrary.wiley.com/doi/10.2307/1940366/).
+[Colwell (1974)](https://onlinelibrary.wiley.com/doi/10.2307/1940366/).
 Constancy measures the extent to which the environment is the same for
 all months in all years. Contingency measures the extent to which the
 environmental differences between months are the same in all years.
