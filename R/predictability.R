@@ -135,6 +135,6 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
   attr(out, "detrended_data") <- detrended
   attr(out, "noise_data") <- noise_list$spec_obj
   attr(out, "noise_model") <- noise_list$model
-  class(out) <- append(class(out), "predictability")
+  class(out) <- append(class(out), "envpreddata")
   out
 }

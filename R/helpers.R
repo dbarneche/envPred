@@ -205,11 +205,11 @@ last_day <- function(x) {
   ceiling_date(x[length(x)], "month") - days(1)
 }
 
-#' Checks if argument is a \code{predictability} object
+#' Checks if argument is an \code{envpreddata} object
 #' 
-#' @param x An \R object
+#' @param x An R object
 #' 
 #' @export
-is_predictability <- function(x) {
-  inherits(x, "predictability")
+is_envpreddata <- function(x) {
+  inherits(x, "envpreddata")
 }
