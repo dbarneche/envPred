@@ -116,24 +116,25 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
                            noise_method)
 
   out <- data.frame(series_n = series_n,
-                      n_na = n_na,
-                      prop_na = n_na / series_n,
-                      n_yrs = length(unique(format(dates, format = "%Y"))),
-                      n_months = length(unique(format(dates, format = "%B"))),
-                      n_days = length(unique(dates)),
-                      frequency = 2 / (length(dates) * delta),
-                      nyquist_freq = 1 / (2 * delta),
-                      raw_mean = mean(time_series, na.rm = TRUE),
-                      raw_var = var(time_series, na.rm  = TRUE),
-                      raw_cv = sd(time_series, na.rm  = TRUE) / mean(time_series, na.rm  = TRUE),
-                      predicted_var = seasonality_list$predicted_var,
-                      unpredicted_var = seasonality_list$unpredicted_var,
-                      unbounded_seasonality = seasonality_list$unbounded_seasonality,
-                      bounded_seasonality = seasonality_list$bounded_seasonality,
-                      env_col = noise_list$slope,
-                      stringsAsFactors = FALSE)
+                    n_na = n_na,
+                    prop_na = n_na / series_n,
+                    n_yrs = length(unique(format(dates, format = "%Y"))),
+                    n_months = length(unique(format(dates, format = "%B"))),
+                    n_days = length(unique(dates)),
+                    frequency = 2 / (length(dates) * delta),
+                    nyquist_freq = 1 / (2 * delta),
+                    raw_mean = mean(time_series, na.rm = TRUE),
+                    raw_var = var(time_series, na.rm  = TRUE),
+                    raw_cv = sd(time_series, na.rm  = TRUE) / mean(time_series, na.rm  = TRUE),
+                    predicted_var = seasonality_list$predicted_var,
+                    unpredicted_var = seasonality_list$unpredicted_var,
+                    unbounded_seasonality = seasonality_list$unbounded_seasonality,
+                    bounded_seasonality = seasonality_list$bounded_seasonality,
+                    env_col = noise_list$slope,
+                    stringsAsFactors = FALSE)
   attr(out, "detrended_data") <- detrended
   attr(out, "noise_data") <- noise_list$spec_obj
+  attr(out, "noise_model") <- noise_list$model
   class(out) <- append(class(out), "predictability")
   out
 }

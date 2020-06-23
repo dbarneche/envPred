@@ -51,7 +51,8 @@ linear_detrend <- function(time_series, dates) {
 spec_slope_get <- function(spec_obj) {
   model <- lm(log10(spec) ~ log10(freq), data = spec_obj)
   list(slope = as.numeric(abs(coef(model)[2])),
-       spec_obj = spec_obj)
+       spec_obj = spec_obj,
+       model = model)
 }
 
 #' Adapt Lomb-Scargle Periodogram
