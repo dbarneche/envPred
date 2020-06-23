@@ -34,7 +34,7 @@ version <- gsub("-", ".", version)
 [![license](https://img.shields.io/badge/license-MIT + file LICENSE-lightgrey.svg)](https://choosealicense.com/)
 <!-- badges: end -->
 
-`envPred` is a package that calculates five "components" of environmental time series data: seasonality, the colour of environmental noise (hereafter *colour*), constancy, contingency and predictability.
+`envPred` is a package that calculates five statistics from environmental time-series data: seasonality, the colour of environmental noise (hereafter *colour*), constancy, contingency and predictability.
 
 Seasonality entails the regularity in the timing and magnitude of fluctuations in the average environmental state over seasons. Colour is defined by how predictable and similar the environment is between successive time points, or how far into the future the environmental state is likely to stay the same, independent of the mean environmental state. White noise occurs when there is no correlation between one measurement and the next, while for reddened noise, there is some correlation between measurements separated by a finite time-scale.
 
@@ -60,7 +60,7 @@ Then install `envPred` using the following:
 * [Net Primary Productivity (NPP) data](http://coastwatch.pfeg.noaa.gov/erddap/griddap/erdPPbfp18day.html)
 * [Sea Surface Temperature (SST)](http://www.esrl.noaa.gov/psd/data/gridded/data.noaa.oisst.v2.highres.html)
 
-The package can be used for any time series data, e.g. temperature, rainfall, light intensity, etc.
+The package can be used for any time-series data, e.g. temperature, rainfall, light intensity, etc.
 
 ## Authors
 
