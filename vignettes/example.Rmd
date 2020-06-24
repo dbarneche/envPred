@@ -37,7 +37,7 @@ sst_pred <- env_stats(sst$time_series, sst$dates, n_states = 11, delta = 1,
                       show_warns = TRUE, noise_method = "spectrum")
 ```
 
-The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods. The use can plot both the de-trended dataset,
+The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods. The user can plot both the de-trended dataset overlaid with the seasonal interpolation,
 
 ```{r}
 gg_envpred(sst_pred, type = "detrended")
