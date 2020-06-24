@@ -12,7 +12,7 @@
 #' \code{time_series}? Irrelevant method if \code{is_uneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.
 #' @param show_warns Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}. 
 #' Strongly recommended for first time users.
-#' @param noise_method A method for estimating the slope beta. Takes 2 possible 
+#' @param noise_method A method for estimating the slope theta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'lomb_scargle'} for unevenly distributed ones.
 #' 
