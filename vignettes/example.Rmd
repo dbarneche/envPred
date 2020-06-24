@@ -11,28 +11,30 @@ vignette: >
 library(envPred)
 ```
 
-First, we recommend carefully reading the help page for the main functions
+First, we recommend carefully reading the help page for the main function
 
 ```{r, eval = FALSE}
-?predictability
-?colwell74
+?env_stats
 ```
 
-To calculate seasonality and colour of environmental noise using sample data (temporally even SST data):
+To calculate the five environmental statistics (seasonality, colour of environmental noise, predictability, constancy, contingency) using sample data (temporally even SST data):
 
 ```{r}
-sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
-                           is_uneven = FALSE, interpolate = FALSE,
-                           show_warns = TRUE, noise_method = "spectrum")
+sst_pred <- env_stats(time_series = sst$time_series, dates = sst$dates,
+                      n_states = 11, delta = 1, is_uneven = FALSE,
+                      interpolate = FALSE, show_warns = TRUE,
+                      noise_method = "spectrum")
 ```
 
-The package threw a warning, which can be addressed in this example by:
+The argument `n_states` is a numeric vector of length 1 containing a somewhat arbitrary number, as Colwell's method divides a continuous variable up into discrete states (read the original [paper](https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1940366) for further details). Default (arbitrary) is 11.
+
+The above example threw a warning, which can be addressed in this example by:
 
 ```{r, warnings = FALSE}
 sst  <-  sst[sst$dates <= as.Date("2007-01-01"), ]
-sst_pred <- predictability(sst$time_series, sst$dates, delta = 1,
-                           is_uneven = FALSE, interpolate = FALSE,
-                           show_warns = TRUE, noise_method = "spectrum")
+sst_pred <- env_stats(sst$time_series, sst$dates, n_states = 11, delta = 1,
+                      is_uneven = FALSE, interpolate = FALSE,
+                      show_warns = TRUE, noise_method = "spectrum")
 ```
 
 The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) methods. The use can plot both the de-trended dataset,
@@ -41,7 +43,7 @@ The data can be plotted using [`ggplot2`](https://ggplot2.tidyverse.org/) method
 gg_envpred(sst_pred, type = "detrended")
 ```
 
-or the spectral density on the log 10 scale
+or the spectral density on the log-10 scale
 
 ```{r}
 gg_envpred(sst_pred, type = "spectral")
@@ -52,23 +54,7 @@ with NAs (carefully check warnings), by using the Lomb-Scargle Periodogram from 
 [`lomb`](https://CRAN.R-project.org/package=lomb).
 
 ```{r, warning = FALSE}
-npp_pred  <-  predictability(npp$time_series, npp$dates, delta = 8,
-                             is_uneven = TRUE, interpolate = TRUE,
-                             show_warns = TRUE, noise_method = "lomb_scargle")
-```
-
-To obtain Colwell's metrics, simply run:
-
-```{r}
-colwell74(sst$time_series, sst$dates, n_states = 11)
-```
-
-The argument `n_states` is a numeric vector of length 1 containing a somewhat arbitrary number, as Colwell's method divides a continuous variable up into discrete states (read the original [paper](http://onlinelibrary.wiley.com/doi/10.2307/1940366/) for further details). Default (arbitrary) is 11.
-
-The package also has a wrapper function that binds the output of `predictability` and `colwell74` together:
-
-```{r, warning = FALSE}
-all_pred_sst  <-  predictability_and_colwell(sst$time_series, sst$dates, n_states = 11, delta = 1,
-                                             is_uneven = FALSE, interpolate = FALSE,
-                                             show_warns = TRUE, noise_method = "spectrum")
+npp_pred  <-  env_stats(npp$time_series, npp$dates, n_states = 11, delta = 8,
+                        is_uneven = TRUE, interpolate = TRUE,
+                        show_warns = TRUE, noise_method = "lomb_scargle")
 ```
