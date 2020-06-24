@@ -1,6 +1,7 @@
-#' Environmental predictability components
+#' Seasonality and colour of environmental noise
 #'
-#' @title Calculates environmental predictability components
+#' Calculates seasonality and colour of environmental noise.
+#' 
 #' @param time_series A \code{\link[base]{numeric}} vector containing 
 #' a raw environmental time series.
 #' @param dates An vector of class \code{\link[base]{Date}}
@@ -14,20 +15,13 @@
 #' @param noise_method A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'lomb_scargle'} for unevenly distributed ones.
-#' @details This function currently allows for monthly-based seasonality calculation only. 
-#' This algorithm adapts the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess (2015)} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 #' 
-#' We advise caution for datasets in which \code{time_series} contains NAs. Particularly, 
-#' we strongly advise setting \code{interpolate = FALSE} for \code{time_series} containing large 
-#' continuous chunks of NAs because the linear interpolation might introduce substantial bias.
-#'
-#' \href{http://onlinelibrary.wiley.com/doi/10.1890/02-3122/abstract}{Vasseur and Yodzis (2004)} Ecology 85: 1146-1152, doi: \href{http://dx.doi.org/10.1890/02-3122}{10.1890/02-3122} recommend time series encompassing at least 128 months or approximately 10 years.
+#' @return A \code{\link[base]{data.frame}}.
 #' 
-#' Also note that if \code{dates} starts and ends in different month of the year, 
-#' some monthly means are estimated with relatively less precision.
-#' @return A \code{\link[base]{data.frame}} with environmental predictability components.
 #' @author Diego Barneche and Scott Burgess.
-#' @seealso \code{\link{seasonality_calc}}, \code{\link{noise_calc}}, \code{\link{colwell74}}.
+#' 
+#' @seealso \code{\link{env_stats}}, \code{\link{seasonality_calc}}, \code{\link{noise_calc}}.
+#' 
 #' @examples
 #' library(envPred)
 #' data(sst)
@@ -35,48 +29,48 @@
 #' # warning messages of which the user should be aware.
 #' # after double-checking that the data falls
 #' # within the recommended specs, set show_warns = FALSE
-#' predictability(sst$time_series,
-#'                sst$dates,
-#'                delta = 1,
-#'                is_uneven = FALSE,
-#'                interpolate = FALSE,
-#'                show_warns = TRUE,
-#'                noise_method = 'spectrum')
-#' predictability(sst$time_series,
-#'                sst$dates,
-#'                delta = 1,
-#'                is_uneven = FALSE,
-#'                interpolate = FALSE,
-#'                show_warns = TRUE,
-#'                noise_method = 'spectrum')
-#' predictability(sst$time_series,
-#'                sst$dates,
-#'                delta = 1,
-#'                is_uneven = FALSE,
-#'                interpolate = FALSE,
-#'                show_warns = TRUE,
-#'                noise_method = 'spectrum')
+#' fct <- envPred:::seasonality_and_colour
+#' fct(sst$time_series,
+#'     sst$dates,
+#'     delta = 1,
+#'     is_uneven = FALSE,
+#'     interpolate = FALSE,
+#'     show_warns = TRUE,
+#'     noise_method = 'spectrum')
+#' fct(sst$time_series,
+#'     sst$dates,
+#'     delta = 1,
+#'     is_uneven = FALSE,
+#'     interpolate = FALSE,
+#'     show_warns = TRUE,
+#'     noise_method = 'spectrum')
+#' fct(sst$time_series,
+#'     sst$dates,
+#'     delta = 1,
+#'     is_uneven = FALSE,
+#'     interpolate = FALSE,
+#'     show_warns = TRUE,
+#'     noise_method = 'spectrum')
 #' data(npp)
-#' predictability(npp$time_series,
-#'                npp$dates,
-#'                delta = 8,
-#'                is_uneven = TRUE,
-#'                interpolate = FALSE,
-#'                show_warns = TRUE,
-#'                noise_method = 'lomb_scargle')
-#' predictability(npp$time_series,
-#'                npp$dates,
-#'                delta = 8,
-#'                is_uneven = TRUE,
-#'                interpolate = TRUE,
-#'                show_warns = TRUE,
-#'                noise_method = 'lomb_scargle')
+#' fct(npp$time_series,
+#'     npp$dates,
+#'     delta = 8,
+#'     is_uneven = TRUE,
+#'     interpolate = FALSE,
+#'     show_warns = TRUE,
+#'     noise_method = 'lomb_scargle')
+#' fct(npp$time_series,
+#'     npp$dates,
+#'     delta = 8,
+#'     is_uneven = TRUE,
+#'     interpolate = TRUE,
+#'     show_warns = TRUE,
+#'     noise_method = 'lomb_scargle')
 #' @importFrom imputeTS na_interpolation
 #' @importFrom stats var sd
-#' @export
-predictability <- function(time_series, dates, delta, is_uneven = FALSE,
-                           interpolate = FALSE, show_warns = TRUE,
-                           noise_method) {
+seasonality_and_colour <- function(time_series, dates, delta, is_uneven = FALSE,
+                                   interpolate = FALSE, show_warns = TRUE,
+                                   noise_method) {
   series_n  <- length(time_series)
   n_na <- sum(is.na(time_series))
   
@@ -95,7 +89,7 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
     n_months <- length(unique(format(dates, format = "%B%Y")))
     if (n_months < 120) {
       warning(sprintf(paste("Time series is shorter than recommended",
-                            "(contains %s months); see ?predictability"),
+                            "(contains %s months); see ?seasonality_and_colour"),
                       n_months))
     }
     months <- format(dates, format = "%B")
@@ -132,9 +126,7 @@ predictability <- function(time_series, dates, delta, is_uneven = FALSE,
                     bounded_seasonality = seasonality_list$bounded_seasonality,
                     env_col = noise_list$slope,
                     stringsAsFactors = FALSE)
-  attr(out, "detrended_data") <- detrended
-  attr(out, "noise_data") <- noise_list$spec_obj
-  attr(out, "noise_model") <- noise_list$model
-  class(out) <- append(class(out), "envpreddata")
-  out
+  list(data = out,
+       detrended_data = detrended,
+       noise_list = noise_list)
 }
