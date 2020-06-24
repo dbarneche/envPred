@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{seasonality_calc}
 \alias{seasonality_calc}
-\title{Calculate the 'colour' of unpredicted de-trended residuals}
+\title{Seasonality}
 \usage{
 seasonality_calc(interpolated_seasons, resid_time_series)
 }
@@ -18,7 +18,7 @@ A \code{\link[base]{list}} containing the sample variance of \code{interpolated_
 \code{resid_time_series}, and the resulting seasonality. See details.
 }
 \description{
-Calculate environmental seasonality
+Calculates seasonality based on seasonally-interpolated vector.
 }
 \details{
 Three types of seasonality are returned currently: an 'absolute' seasonality which corresponds to the sample variance of
@@ -27,7 +27,7 @@ ratio between sample variances of \code{interpolated_seasons} and \code{resid_ti
 relative to the total summed variances of both \code{interpolated_seasons} and \code{resid_time_series}.
 }
 \seealso{
-\code{\link{monthly_bins}}, \code{\link{predictability}}.
+\code{\link{monthly_bins}}, \code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

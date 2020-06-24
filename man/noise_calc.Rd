@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{noise_calc}
 \alias{noise_calc}
-\title{Calculate the 'colour' of the noise of unpredicted de-trended residuals}
+\title{Environmental noise wrapper}
 \usage{
 noise_calc(
   resid_time_series,
@@ -22,17 +22,18 @@ values: \code{'spectrum'} for evenly distributed time series or
 \code{'lomb_scargle'} for unevenly distributed ones.}
 }
 \value{
-A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
+A \code{\link[base]{list}} containing the beta slope, the original
+spec_obj \code{\link[base]{data.frame}}, and the fitted linear model.
 }
 \description{
-Calculate environmental noise
+Adapts periodogram and calculates the 'colour' of the noise of unpredicted de-trended residuals
 }
 \details{
 This function calculates beta slope (assuming 1/f noise family) on the
 residual time series using function \code{\link{spec_slope_get}}.
 }
 \seealso{
-\code{\link{monthly_bins}}, \code{\link{predictability}}, \code{\link{spec_slope_get}}.
+\code{\link{monthly_bins}}, \code{\link{seasonality_and_colour}}, \code{\link{spec_slope_get}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

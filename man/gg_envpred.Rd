@@ -2,12 +2,12 @@
 % Please edit documentation in R/gg_envpred.R
 \name{gg_envpred}
 \alias{gg_envpred}
-\title{Plot predictability object}
+\title{Plot an object of class \code{envpreddata}}
 \usage{
 gg_envpred(object, type = c("detrended", "spectral"))
 }
 \arguments{
-\item{object}{A \code{\link{predictability}} object.}
+\item{object}{An object of class \code{\link{envpreddata}}}
 
 \item{type}{Either \code{detrended} (default) or \code{spectral}.
 See Details.}
@@ -16,7 +16,7 @@ See Details.}
 A \code{\link[ggplot2]{ggplot}} object.
 }
 \description{
-Plot predictability object
+Plot an object of class \code{envpreddata}
 }
 \details{
 Two types of plots are provided:
@@ -29,15 +29,19 @@ a function of frequency.
 \dontrun{
 library(envPred)
 data(sst)
-dat <- predictability(sst$time_series,
-                      sst$dates,
-                      delta = 1,
-                      is_uneven = FALSE,
-                      interpolate = FALSE,
-                      show_warns = TRUE,
-                      noise_method = 'spectrum')
+dat <- env_stats(sst$time_series,
+                 sst$dates,
+                 n_states = 11,
+                 delta = 1,
+                 is_uneven = FALSE,
+                 interpolate = FALSE,
+                 show_warns = TRUE,
+                 noise_method = 'spectrum')
 
 gg_envpred(dat, type = "detrended")
 gg_envpred(dat, type = "spectral")
 }
+}
+\seealso{
+\code{\link{env_stats}}, \code{\link{envpreddata}}.
 }

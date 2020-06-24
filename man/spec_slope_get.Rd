@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{spec_slope_get}
 \alias{spec_slope_get}
-\title{Calculate the 'colour' of environmental noise assuming 1/f noise family}
+\title{Colour of environmental noise}
 \usage{
 spec_slope_get(spec_obj)
 }
@@ -12,16 +12,17 @@ of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.}
 }
 \value{
-A \code{\link[base]{numeric}} vector of length 1 containing the beta slope.
+A \code{\link[base]{list}} containing the beta slope, the original
+spec_obj \code{\link[base]{data.frame}}, and the fitted linear model.
 }
 \description{
-Adapt Lomb-Scargle Periodogram
+Calculate the 'colour' of environmental noise assuming 1/f noise family
 }
 \details{
 Calculates slope of log10(normalised power)~log10(frequencies).
 }
 \seealso{
-\code{\link{predictability}}.
+\code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

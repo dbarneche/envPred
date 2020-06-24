@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{spec_output_prep}
 \alias{spec_output_prep}
-\title{Calculates and renames output of Spectrum Periodogram}
+\title{Adapt Spectrum Periodogram}
 \usage{
 spec_output_prep(resid_time_series, ...)
 }
@@ -18,10 +18,10 @@ of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.
 }
 \description{
-Adapt Spectrum Periodogram
+Calculates and renames output of Spectrum Periodogram
 }
 \seealso{
-\code{\link{spec_slope_get}}, \code{\link{predictability}}.
+\code{\link{spec_slope_get}}, \code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

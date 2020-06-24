@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{lmb_output_prep}
 \alias{lmb_output_prep}
-\title{Calculates and renames output of Lomb-Scargle Periodogram}
+\title{Adapt Lomb-Scargle Periodogram}
 \usage{
 lmb_output_prep(resid_time_series, ...)
 }
@@ -18,10 +18,10 @@ of frequencies/periods scanned, and a vector containing the normalised power
 corresponding to scanned frequencies/periods.
 }
 \description{
-Adapt Lomb-Scargle Periodogram
+Calculates and renames output of Lomb-Scargle Periodogram
 }
 \seealso{
-\code{\link{spec_slope_get}}, \code{\link{predictability}}.
+\code{\link{spec_slope_get}}, \code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

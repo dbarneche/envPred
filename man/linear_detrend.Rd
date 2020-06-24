@@ -23,7 +23,7 @@ after removing the linear trend.
 Linear detrending of time series
 }
 \seealso{
-\code{\link{predictability}}.
+\code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

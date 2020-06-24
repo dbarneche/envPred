@@ -2,8 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{detrend_and_bin}
 \alias{detrend_and_bin}
-\title{Binds output from \code{\link{linear_detrend}} and
-\code{\link{monthly_bins}}}
+\title{Wrapper}
 \usage{
 detrend_and_bin(...)
 }
@@ -14,7 +13,8 @@ detrend_and_bin(...)
 A \code{\link[base]{data.frame}}.
 }
 \description{
-Wrapper
+Binds output from \code{\link{linear_detrend}} and
+\code{\link{monthly_bins}}
 }
 \author{
 Diego Barneche and Scott Burgess.

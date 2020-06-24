@@ -26,7 +26,7 @@ Compute the seasonal (monthly) components of time series
 This algorithm follows the steps described in \href{http://onlinelibrary.wiley.com/doi/10.1111/ele.12402/abstract}{Marshall and Burgess 2015} Ecology Letters 18: 1461–0248, doi: \href{http://dx.doi.org/10.1111/ele.12402}{10.1111/ele.12402}.
 }
 \seealso{
-\code{\link{predictability}}.
+\code{\link{seasonality_and_colour}}.
 }
 \author{
 Diego Barneche and Scott Burgess.

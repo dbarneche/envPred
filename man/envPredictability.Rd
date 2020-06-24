@@ -2,10 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{envPredictability}
 \alias{envPredictability}
-\title{Calculates environmental predictability components
-
-Environmental predictability components (deprecated).
-Use \code{\link{predictability}} instead.}
+\title{Seasonality and colour of environmental noise (deprecated)}
 \usage{
 envPredictability(
   rawTimeSeries,
@@ -42,16 +39,14 @@ values: \code{'spectrum'} for evenly distributed time series or
 \code{'LombScargle'} for unevenly distributed ones.}
 }
 \value{
-A \code{\link[base]{data.frame}} with environmental predictability components.
+A \code{\link[base]{data.frame}}.
 }
 \description{
-Calculates environmental predictability components
-
-Environmental predictability components (deprecated).
-Use \code{\link{predictability}} instead.
+Calculates seasonality and colour of environmental noise (deprecated).
+This function will be removed in future versions of the package.
 }
 \seealso{
-\code{\link{predictability}}.
+\code{\link{env_stats}}.
 }
 \author{
 Diego Barneche and Scott Burgess.
