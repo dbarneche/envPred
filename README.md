@@ -73,9 +73,10 @@ from the
 package if the time series is unevenly distributed ([Glynn et
 al. 2006](https://academic.oup.com/bioinformatics/article/22/3/310/220284)).
 Spectral densities and therefore *θ* are calculated between the
-frequencies of 2/(*n**Δ**t*) and 1/(2*Δ**t*) (i.e. Nyquist frequency),
-where *Δ**t* is the time gap between consecutive points in the time
-series, and *n* is the number of observations in the time series.
+frequencies of 2/(*n* *Δ* *t*) and 1/(2 *Δ* *t*) (i.e. Nyquist
+frequency), where *Δ* *t* is the time gap between consecutive points in
+the time series, and *n* is the number of observations in the time
+series.
 
 Constancy, contingency and predictability are calculated following
 [Colwell
