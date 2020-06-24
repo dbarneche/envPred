@@ -99,55 +99,43 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/dbarneche/envPred">envPred</a></span>)
 </pre></div>
-<p>First, we recommend carefully reading the help page for the main functions</p>
+<p>First, we recommend carefully reading the help page for the main function</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="op">?</span><span class="kw">predictability</span>
-<span class="op">?</span><span class="kw">colwell74</span>
+<span class="op">?</span><span class="kw">env_stats</span>
 </pre></div>
-<p>To calculate seasonality and colour of environmental noise using sample data (temporally even SST data):</p>
+<p>To calculate the five environmental statistics (seasonality, colour of environmental noise, predictability, constancy, contingency) using sample data (temporally even SST data):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">sst_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predictability.html">predictability</a></span>(<span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>, delta = <span class="fl">1</span>,
-                           is_uneven = <span class="fl">FALSE</span>, interpolate = <span class="fl">FALSE</span>,
-                           show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"spectrum"</span>)
+<span class="kw">sst_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/env_stats.html">env_stats</a></span>(time_series = <span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, dates = <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>,
+                      n_states = <span class="fl">11</span>, delta = <span class="fl">1</span>, is_uneven = <span class="fl">FALSE</span>,
+                      interpolate = <span class="fl">FALSE</span>, show_warns = <span class="fl">TRUE</span>,
+                      noise_method = <span class="st">"spectrum"</span>)
 </pre></div>
-<pre><code>## Warning in predictability(sst$time_series, sst$dates, delta = 1, is_uneven =
-## FALSE, : Time series starts and ends at different times of the year. Starting
-## month is January and ending month is December</code></pre>
-<p>The package threw a warning, which can be addressed in this example by:</p>
+<pre><code>## Warning in seasonality_and_colour(time_series, dates, ...): Time series starts
+## and ends at different times of the year. Starting month is January and ending
+## month is December</code></pre>
+<p>The argument <code>n_states</code> is a numeric vector of length 1 containing a somewhat arbitrary number, as Colwell’s method divides a continuous variable up into discrete states (read the original <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1940366">paper</a> for further details). Default (arbitrary) is 11.</p>
+<p>The above example threw a warning, which can be addressed in this example by:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">sst</span>  <span class="op">&lt;-</span>  <span class="kw">sst</span>[<span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span>(<span class="st">"2007-01-01"</span>), ]
-<span class="kw">sst_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predictability.html">predictability</a></span>(<span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>, delta = <span class="fl">1</span>,
-                           is_uneven = <span class="fl">FALSE</span>, interpolate = <span class="fl">FALSE</span>,
-                           show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"spectrum"</span>)
+<span class="kw">sst_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/env_stats.html">env_stats</a></span>(<span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>, n_states = <span class="fl">11</span>, delta = <span class="fl">1</span>,
+                      is_uneven = <span class="fl">FALSE</span>, interpolate = <span class="fl">FALSE</span>,
+                      show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"spectrum"</span>)
 </pre></div>
 <p>The data can be plotted using <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> methods. The use can plot both the de-trended dataset,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="../reference/gg_envpred.html">gg_envpred</a></span>(<span class="kw">sst_pred</span>, type = <span class="st">"detrended"</span>)
 </pre></div>
 <p><img src="example_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>or the spectral density on the log 10 scale</p>
+<p>or the spectral density on the log-10 scale</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="../reference/gg_envpred.html">gg_envpred</a></span>(<span class="kw">sst_pred</span>, type = <span class="st">"spectral"</span>)
 </pre></div>
 <p><img src="example_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Finally, the package also handles temporally uneven NPP data with NAs (carefully check warnings), by using the Lomb-Scargle Periodogram from package <a href="https://CRAN.R-project.org/package=lomb"><code>lomb</code></a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">npp_pred</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/predictability.html">predictability</a></span>(<span class="kw">npp</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">npp</span><span class="op">$</span><span class="kw">dates</span>, delta = <span class="fl">8</span>,
-                             is_uneven = <span class="fl">TRUE</span>, interpolate = <span class="fl">TRUE</span>,
-                             show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"lomb_scargle"</span>)
-</pre></div>
-<p>To obtain Colwell’s metrics, simply run:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/colwell74.html">colwell74</a></span>(<span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>, n_states = <span class="fl">11</span>)
-</pre></div>
-<pre><code>##    colwell_c colwell_m colwell_p
-## 1 0.02828487 0.4656679 0.4939528</code></pre>
-<p>The argument <code>n_states</code> is a numeric vector of length 1 containing a somewhat arbitrary number, as Colwell’s method divides a continuous variable up into discrete states (read the original <a href="http://onlinelibrary.wiley.com/doi/10.2307/1940366/">paper</a> for further details). Default (arbitrary) is 11.</p>
-<p>The package also has a wrapper function that binds the output of <code>predictability</code> and <code>colwell74</code> together:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">all_pred_sst</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/predictability_and_colwell.html">predictability_and_colwell</a></span>(<span class="kw">sst</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">sst</span><span class="op">$</span><span class="kw">dates</span>, n_states = <span class="fl">11</span>, delta = <span class="fl">1</span>,
-                                             is_uneven = <span class="fl">FALSE</span>, interpolate = <span class="fl">FALSE</span>,
-                                             show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"spectrum"</span>)
+<span class="kw">npp_pred</span>  <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/env_stats.html">env_stats</a></span>(<span class="kw">npp</span><span class="op">$</span><span class="kw">time_series</span>, <span class="kw">npp</span><span class="op">$</span><span class="kw">dates</span>, n_states = <span class="fl">11</span>, delta = <span class="fl">8</span>,
+                        is_uneven = <span class="fl">TRUE</span>, interpolate = <span class="fl">TRUE</span>,
+                        show_warns = <span class="fl">TRUE</span>, noise_method = <span class="st">"lomb_scargle"</span>)
 </pre></div>
   </div>
 

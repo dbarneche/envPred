@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Seasonality and colour of environmental noise (deprecated) — envPredictability • envPred</title>
+<title>Checks if argument is an <code>envpreddata</code> object — is.envpreddata • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Seasonality and colour of environmental noise (deprecated) — envPredictability" />
-<meta property="og:description" content="Calculates seasonality and colour of environmental noise (deprecated).
-This function will be removed in future versions of the package." />
+<meta property="og:title" content="Checks if argument is an <code>envpreddata</code> object — is.envpreddata" />
+<meta property="og:description" content="Checks if argument is an envpreddata object" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,79 +128,29 @@ This function will be removed in future versions of the package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Seasonality and colour of environmental noise (deprecated)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
-    <div class="hidden name"><code>envPredictability.Rd</code></div>
+    <h1>Checks if argument is an <code>envpreddata</code> object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>is.envpreddata.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates seasonality and colour of environmental noise (deprecated).
-This function will be removed in future versions of the package.</p>
+    <p>Checks if argument is an <code>envpreddata</code> object</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/envPredictability.html'>envPredictability</a></span>(
-  <span class='kw'>rawTimeSeries</span>,
-  <span class='kw'>datesVector</span>,
-  <span class='kw'>delta</span>,
-  isUneven = <span class='fl'>FALSE</span>,
-  interpolate = <span class='fl'>FALSE</span>,
-  checkPlots = <span class='fl'>FALSE</span>,
-  showWarnings = <span class='fl'>TRUE</span>,
-  <span class='kw'>noiseMethod</span>
-)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/is.envpreddata.html'>is.envpreddata</a></span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>rawTimeSeries</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing
-a raw environmental time series.</p></td>
-    </tr>
-    <tr>
-      <th>datesVector</th>
-      <td><p>An vector of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
-(must be in progressive chronological order).</p></td>
-    </tr>
-    <tr>
-      <th>delta</th>
-      <td><p>Time interval (any unit) of <code>rawTimeSeries</code>.</p></td>
-    </tr>
-    <tr>
-      <th>isUneven</th>
-      <td><p>Is <code>rawTimeSeries</code> even or unevenly distributed in time? Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>interpolate</th>
-      <td><p>Should a linear interpolation be applied to missing values in
-<code>rawTimeSeries</code>? Irrelevant method if <code>isUneven</code> is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>. Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>checkPlots</th>
-      <td><p>Deprecated. Use newer <code><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></code> instead.</p></td>
-    </tr>
-    <tr>
-      <th>showWarnings</th>
-      <td><p>Should cautionary warning messages be displayed? Default is <code><a href='https://rdrr.io/r/base/logical.html'>TRUE</a></code>.
-Strongly recommended for first time users.</p></td>
-    </tr>
-    <tr>
-      <th>noiseMethod</th>
-      <td><p>A method for estimating the slope beta. Takes 2 possible
-values: <code>'spectrum'</code> for evenly distributed time series or
-<code>'LombScargle'</code> for unevenly distributed ones.</p></td>
+      <th>x</th>
+      <td><p>An R object</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>.</p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Diego Barneche and Scott Burgess.</p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/envpreddata-class.html'>envpreddata</a></code>, <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate the 'colour' of environmental noise assuming 1/f noise family — spec_slope_get • envPred</title>
+<title>Colour of environmental noise — spec_slope_get • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Calculate the 'colour' of environmental noise assuming 1/f noise family — spec_slope_get" />
-<meta property="og:description" content="Adapt Lomb-Scargle Periodogram" />
+<meta property="og:title" content="Colour of environmental noise — spec_slope_get" />
+<meta property="og:description" content="Calculate the 'colour' of environmental noise assuming 1/f noise family" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -128,13 +128,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate the 'colour' of environmental noise assuming 1/f noise family</h1>
+    <h1>Colour of environmental noise</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
     <div class="hidden name"><code>spec_slope_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Adapt Lomb-Scargle Periodogram</p>
+    <p>Calculate the 'colour' of environmental noise assuming 1/f noise family</p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/spec_slope_get.html'>spec_slope_get</a></span>(<span class='kw'>spec_obj</span>)</pre>
@@ -152,13 +152,14 @@ corresponding to scanned frequencies/periods.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector of length 1 containing the beta slope.</p>
+    <p>A <code><a href='https://rdrr.io/r/base/list.html'>list</a></code> containing the beta slope, the original
+spec_obj <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>, and the fitted linear model.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Calculates slope of log10(normalised power)~log10(frequencies).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/predictability.html'>predictability</a></code>.</p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/seasonality_and_colour.html'>seasonality_and_colour</a></code>.</p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Diego Barneche and Scott Burgess.</p>

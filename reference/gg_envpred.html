@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot predictability object — gg_envpred • envPred</title>
+<title>Plot an object of class <code>envpreddata</code> — gg_envpred • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Plot predictability object — gg_envpred" />
-<meta property="og:description" content="Plot predictability object" />
+<meta property="og:title" content="Plot an object of class <code>envpreddata</code> — gg_envpred" />
+<meta property="og:description" content="Plot an object of class envpreddata" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -128,13 +128,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot predictability object</h1>
+    <h1>Plot an object of class <code>envpreddata</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/gg_envpred.R'><code>R/gg_envpred.R</code></a></small>
     <div class="hidden name"><code>gg_envpred.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot predictability object</p>
+    <p>Plot an object of class <code>envpreddata</code></p>
     </div>
 
     <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></span>(<span class='kw'>object</span>, type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"detrended"</span>, <span class='st'>"spectral"</span>))</pre>
@@ -144,7 +144,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>A <code><a href='https://rdrr.io/pkg/envPred/man/predictability.html'>predictability</a></code> object.</p></td>
+      <td><p>An object of class <code><a href='https://rdrr.io/pkg/envPred/man/envpreddata-class.html'>envpreddata</a></code></p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -163,18 +163,22 @@ detrended: show the time series after linear
 de-trending, including the seasonality interpolation.
 spectral: The spectral power density as
 a function of frequency.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>, <code><a href='https://rdrr.io/pkg/envPred/man/envpreddata-class.html'>envpreddata</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/dbarneche/envPred'>envPred</a></span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>sst</span>)
-<span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/envPred/man/predictability.html'>predictability</a></span>(<span class='kw'>sst</span><span class='op'>$</span><span class='kw'>time_series</span>,
-                      <span class='kw'>sst</span><span class='op'>$</span><span class='kw'>dates</span>,
-                      delta = <span class='fl'>1</span>,
-                      is_uneven = <span class='fl'>FALSE</span>,
-                      interpolate = <span class='fl'>FALSE</span>,
-                      show_warns = <span class='fl'>TRUE</span>,
-                      noise_method = <span class='st'>'spectrum'</span>)
+<span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></span>(<span class='kw'>sst</span><span class='op'>$</span><span class='kw'>time_series</span>,
+                 <span class='kw'>sst</span><span class='op'>$</span><span class='kw'>dates</span>,
+                 n_states = <span class='fl'>11</span>,
+                 delta = <span class='fl'>1</span>,
+                 is_uneven = <span class='fl'>FALSE</span>,
+                 interpolate = <span class='fl'>FALSE</span>,
+                 show_warns = <span class='fl'>TRUE</span>,
+                 noise_method = <span class='st'>'spectrum'</span>)
 
 <span class='fu'><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></span>(<span class='kw'>dat</span>, type = <span class='st'>"detrended"</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></span>(<span class='kw'>dat</span>, type = <span class='st'>"spectral"</span>)

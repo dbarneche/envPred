@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Seasonality and colour of environmental noise (deprecated) — envPredictability • envPred</title>
+<title>Class <code>envpreddata</code> of environmental time series statistics calculated with the <span class="pkg">envPred</span> package — envpreddata-class • envPred</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,12 @@
 
 
 
-<meta property="og:title" content="Seasonality and colour of environmental noise (deprecated) — envPredictability" />
-<meta property="og:description" content="Calculates seasonality and colour of environmental noise (deprecated).
-This function will be removed in future versions of the package." />
+<meta property="og:title" content="Class <code>envpreddata</code> of environmental time series statistics calculated with the <span class="pkg">envPred</span> package — envpreddata-class" />
+<meta property="og:description" content="Statistics calculated with the envPred package are
+represented as a envpreddata object, which contains a data.frame with
+descriptive summary of the time series vector (length, number of NAs, etc), the
+mean, variance, and coefficient of variation of the environmental time series, and
+seasonality, colour of environmental noise, constancy, contingency and predictability." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,79 +132,72 @@ This function will be removed in future versions of the package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Seasonality and colour of environmental noise (deprecated)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
-    <div class="hidden name"><code>envPredictability.Rd</code></div>
+    <h1>Class <code>envpreddata</code> of environmental time series statistics calculated with the <span class="pkg">envPred</span> package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbarneche/envPred/blob/master/R/envpreddata-class.R'><code>R/envpreddata-class.R</code></a></small>
+    <div class="hidden name"><code>envpreddata-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates seasonality and colour of environmental noise (deprecated).
-This function will be removed in future versions of the package.</p>
+    <p>Statistics calculated with the <code><a href='https://rdrr.io/pkg/envPred/man/envPred-package.html'>envPred</a></code> package are
+represented as a <code>envpreddata</code> object, which contains a data.frame with
+descriptive summary of the time series vector (length, number of NAs, etc), the
+mean, variance, and coefficient of variation of the environmental time series, and
+seasonality, colour of environmental noise, constancy, contingency and predictability.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/envPredictability.html'>envPredictability</a></span>(
-  <span class='kw'>rawTimeSeries</span>,
-  <span class='kw'>datesVector</span>,
-  <span class='kw'>delta</span>,
-  isUneven = <span class='fl'>FALSE</span>,
-  interpolate = <span class='fl'>FALSE</span>,
-  checkPlots = <span class='fl'>FALSE</span>,
-  showWarnings = <span class='fl'>TRUE</span>,
-  <span class='kw'>noiseMethod</span>
-)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>rawTimeSeries</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector containing
-a raw environmental time series.</p></td>
-    </tr>
-    <tr>
-      <th>datesVector</th>
-      <td><p>An vector of class <code><a href='https://rdrr.io/r/base/Dates.html'>Date</a></code> of format YYYY-MM-DD
-(must be in progressive chronological order).</p></td>
-    </tr>
-    <tr>
-      <th>delta</th>
-      <td><p>Time interval (any unit) of <code>rawTimeSeries</code>.</p></td>
-    </tr>
-    <tr>
-      <th>isUneven</th>
-      <td><p>Is <code>rawTimeSeries</code> even or unevenly distributed in time? Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>interpolate</th>
-      <td><p>Should a linear interpolation be applied to missing values in
-<code>rawTimeSeries</code>? Irrelevant method if <code>isUneven</code> is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>. Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>checkPlots</th>
-      <td><p>Deprecated. Use newer <code><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></code> instead.</p></td>
-    </tr>
-    <tr>
-      <th>showWarnings</th>
-      <td><p>Should cautionary warning messages be displayed? Default is <code><a href='https://rdrr.io/r/base/logical.html'>TRUE</a></code>.
-Strongly recommended for first time users.</p></td>
-    </tr>
-    <tr>
-      <th>noiseMethod</th>
-      <td><p>A method for estimating the slope beta. Takes 2 possible
-values: <code>'spectrum'</code> for evenly distributed time series or
-<code>'LombScargle'</code> for unevenly distributed ones.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
+    <p>See function <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>.</p>
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+
+    
+
+<dl>
+<dt><code>series_n</code></dt><dd><p>Length of the time series.</p></dd>
+
+<dt><code>n_na</code></dt><dd><p>Number of NAs in the time series.</p></dd>
+
+<dt><code>prop_na</code></dt><dd><p>Proportion of NAs in the time series.</p></dd>
+
+<dt><code>n_yrs</code></dt><dd><p>Number of years in the time series.</p></dd>
+
+<dt><code>n_months</code></dt><dd><p>Number of months in the time series.</p></dd>
+
+<dt><code>n_days</code></dt><dd><p>Number of days in the time series.</p></dd>
+
+<dt><code>frequency</code></dt><dd><p>Frequency (\(2 / (n \Delta t)\)) of the time series, where \(\Delta t\) is the time gap between consecutive points in the time series, and \(n\) is the number of observations in the time series.</p></dd>
+
+<dt><code>nyquist_freq</code></dt><dd><p>Nyquist frequency (\(1 / (2 \Delta t)\)) of the time series.</p></dd>
+
+<dt><code>raw_mean</code></dt><dd><p>Arithmetic mean of the time series.</p></dd>
+
+<dt><code>raw_var</code></dt><dd><p>Variance of the time series.</p></dd>
+
+<dt><code>raw_cv</code></dt><dd><p>Coefficient of variation (standard deviation / mean) of the time series.</p></dd>
+
+<dt><code>predicted_var</code></dt><dd><p>Variance of the seasonal trend. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>unpredicted_var</code></dt><dd><p>Variance of the residual time series (i.e. the time series after the seasonal trend was removed). See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>unbounded_seasonality</code></dt><dd><p>Seasonality as var_predict / var_unpredict. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>bounded_seasonality</code></dt><dd><p>Seasonality as var_predict / (var_predict + var_unpredict). See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>env_col</code></dt><dd><p>Colour of environmental noise. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>colwell_c</code></dt><dd><p>Colwell's constancy. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>colwell_m</code></dt><dd><p>Colwell's contingency. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+<dt><code>colwell_p</code></dt><dd><p>Colwell's predictability. See <code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code> for further explanations.</p></dd>
+
+</dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>.</p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Diego Barneche and Scott Burgess.</p>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></code>,
+<code><a href='https://rdrr.io/pkg/envPred/man/gg_envpred.html'>gg_envpred</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
