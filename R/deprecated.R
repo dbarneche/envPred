@@ -1,8 +1,8 @@
-#' @title Calculates environmental predictability components 
+#' Seasonality and colour of environmental noise (deprecated)
 #' 
-#' Environmental predictability components (deprecated).
-#' Use \code{\link{predictability}} instead.
-#'
+#' Calculates seasonality and colour of environmental noise (deprecated).
+#' This function will be removed in future versions of the package.
+#' 
 #' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
 #' a raw environmental time series.
 #' @param datesVector An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
@@ -17,48 +17,52 @@
 #' @param noiseMethod A method for estimating the slope beta. Takes 2 possible 
 #' values: \code{'spectrum'} for evenly distributed time series or 
 #' \code{'LombScargle'} for unevenly distributed ones.
-#' @return A \code{\link[base]{data.frame}} with environmental predictability components.
+#' 
+#' @return A \code{\link[base]{data.frame}}.
+#' 
 #' @author Diego Barneche and Scott Burgess.
-#' @seealso \code{\link{predictability}}.
+#' 
+#' @seealso \code{\link{env_stats}}.
+#' 
 #' @export
 envPredictability  <-  function(rawTimeSeries, datesVector, delta,
                                 isUneven = FALSE, interpolate = FALSE,
                                 checkPlots = FALSE, showWarnings = TRUE,
                                 noiseMethod) {
   message("\"envPredictability\" is deprecated;",
-          " use \"predictability\" instead")
+          " use \"env_stats\" instead")
   noiseMethod  <-  ifelse(noiseMethod == "LombScargle", "lomb_scargle", noiseMethod)
-  predictability(rawTimeSeries,
-                 datesVector,
-                 delta,
-                 isUneven,
-                 interpolate,
-                 showWarnings,
-                 noiseMethod)
+  seasonality_and_colour(rawTimeSeries,
+                         datesVector,
+                         delta,
+                         isUneven,
+                         interpolate,
+                         showWarnings,
+                         noiseMethod)
 }
 
-#' @title Calculates environmental predictability components and Colwell (1974) metric
+#' Environmental time series statistics (deprecated)
 #' 
-#' Environmental predictability components (deprecated).
-#' Use \code{\link{predictability_and_colwell}} instead.
+#' Calculates seasonality, colour of environmental noise, constancy, contingency and predictability (deprecated).
+#' This function will be removed in future versions of the package.
+#' Use \code{\link{env_stats}} instead.
 #'
-#' @param rawTimeSeries A \code{\link[base]{numeric}} vector containing 
-#' a raw environmental time series.
-#' @param datesVector An vector of class \code{\link[base]{Date}} of format YYYY-MM-DD 
-#' (must be in progressive chronological order).
+#' @inherit env_stats details return
+#' 
+#' @inheritParams envPredictability
+#' 
 #' @param nStates is a \code{\link[base]{numeric}} vector of length 1 containing 
 #' a somewhat arbitrary number, as Colwell's method divides a continuous variable
-#' up into discrete states. Default (arbitrary) is 11. See \code{\link{colwell74}}
+#' up into discrete states. Default (arbitrary) is 11. See \code{\link{colwell_stats}}
 #' for Details.
+#' 
 #' @param ... Additional arguments to \code{\link{envPredictability}}.
-#' @details Wrapper function.
-#' @return A \code{\link[base]{data.frame}} with environmental predictability components and 
-#' Colwell (1974) metric.
+#' 
 #' @author Diego Barneche and Scott Burgess.
-#' @seealso \code{\link{envPredictability}},\code{\link{colwell74}}.
+#' 
 #' @export
 envPredictabilityAndColwell  <-  function (rawTimeSeries, datesVector, nStates, ...) {
   message("\"envPredictabilityAndColwell\" is deprecated;",
-          " use \"predictability_and_colwell\" instead")
-  predictability_and_colwell(rawTimeSeries, datesVector, nStates, ...)
+          " use \"env_stats\" instead")
+  env_stats(rawTimeSeries, datesVector, nStates, ...)
 }
