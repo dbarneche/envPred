@@ -12,6 +12,18 @@ sst2$time_series[sample(seq_len(nrow(sst2)), 50)]  <-  NA
 sst3  <-  sst[1:which(sst$dates == as.Date("2007-01-01")), ]
 
 test_that("Simple corner cases", {
+    test_check <- env_stats(sst3$time_series, sst3$dates, n_states = 11, delta = 1, is_uneven = FALSE, interpolate = FALSE, show_warns = TRUE, noise_method = "spectrum")
+    expect_true(is.envpreddata(test_check))
+    expect_false(is.envpreddata(NULL))
+    expect_false(is.envpreddata(NA))
+    expect_false(is.envpreddata(""))
+    expect_false(is.envpreddata(1))
+    expect_false(is.envpreddata(TRUE))
+    expect_false(is.envpreddata(FALSE))
+    expect_false(is.envpreddata(data.frame(z = 10)))
+    expect_false(is.envpreddata(list(z = 10)))
+    expect_false(is.envpreddata(matrix(1:3, 1, 3)))
+
     ################
     # linear_detrend
     ################
