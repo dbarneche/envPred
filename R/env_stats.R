@@ -60,7 +60,7 @@
 #'           noise_method = 'lomb_scargle')
 #' 
 #' @export
-env_stats <- function(time_series, dates, n_states, ...) {
+env_stats <- function(time_series, dates, n_states = 11, ...) {
   sc_tab <- seasonality_and_colour(time_series, dates, ...)
   colwell_tab <- colwell_stats(time_series, dates, n_states)
   out <- cbind(sc_tab$data, colwell_tab)
