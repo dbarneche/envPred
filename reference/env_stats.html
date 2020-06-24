@@ -137,7 +137,7 @@
     <p>Calculates seasonality, colour of environmental noise, constancy, contingency and predictability.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></span>(<span class='kw'>time_series</span>, <span class='kw'>dates</span>, <span class='kw'>n_states</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/envPred/man/env_stats.html'>env_stats</a></span>(<span class='kw'>time_series</span>, <span class='kw'>dates</span>, n_states = <span class='fl'>11</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,7 +167,7 @@ up into discrete states. Default (arbitrary) is 11. See Details.</p></td>
 <code>time_series</code>? Irrelevant method if <code>is_uneven</code> is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>. Default is <code><a href='https://rdrr.io/r/base/logical.html'>FALSE</a></code>.</p></dd>
     <dt><code>show_warns</code></dt><dd><p>Should cautionary warning messages be displayed? Default is <code><a href='https://rdrr.io/r/base/logical.html'>TRUE</a></code>.
 Strongly recommended for first time users.</p></dd>
-    <dt><code>noise_method</code></dt><dd><p>A method for estimating the slope beta. Takes 2 possible
+    <dt><code>noise_method</code></dt><dd><p>A method for estimating the slope theta. Takes 2 possible
 values: <code>'spectrum'</code> for evenly distributed time series or
 <code>'lomb_scargle'</code> for unevenly distributed ones.</p></dd>
   
