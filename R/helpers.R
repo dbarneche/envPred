@@ -209,7 +209,9 @@ last_day <- function(x) {
 #' 
 #' @param x An R object
 #' 
+#' @seealso \code{\link{envpreddata}}, \code{\link{env_stats}}.
+#' 
 #' @export
-is_envpreddata <- function(x) {
+is.envpreddata <- function(x) {
   inherits(x, "envpreddata")
 }
