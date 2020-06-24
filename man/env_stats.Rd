@@ -4,7 +4,7 @@
 \alias{env_stats}
 \title{Environmental time series statistics}
 \usage{
-env_stats(time_series, dates, n_states, ...)
+env_stats(time_series, dates, n_states = 11, ...)
 }
 \arguments{
 \item{time_series}{A \code{\link[base]{numeric}} vector containing
@@ -26,7 +26,7 @@ up into discrete states. Default (arbitrary) is 11. See Details.}
 \code{time_series}? Irrelevant method if \code{is_uneven} is \code{\link[base]{FALSE}}. Default is \code{\link[base]{FALSE}}.}
     \item{\code{show_warns}}{Should cautionary warning messages be displayed? Default is \code{\link[base]{TRUE}}.
 Strongly recommended for first time users.}
-    \item{\code{noise_method}}{A method for estimating the slope beta. Takes 2 possible
+    \item{\code{noise_method}}{A method for estimating the slope theta. Takes 2 possible
 values: \code{'spectrum'} for evenly distributed time series or
 \code{'lomb_scargle'} for unevenly distributed ones.}
   }}
