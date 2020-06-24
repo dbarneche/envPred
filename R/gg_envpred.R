@@ -1,30 +1,37 @@
-#' Plot predictability object
+#' Plot an object of class \code{envpreddata}
 #'
-#' @param object A \code{\link{predictability}} object.
+#' @param object An object of class \code{\link{envpreddata}}
 #' @param type Either \code{detrended} (default) or \code{spectral}.
 #' See Details.
+#' 
 #' @details Two types of plots are provided:
 #' detrended: show the time series after linear
 #' de-trending, including the seasonality interpolation.
 #' spectral: The spectral power density as
 #' a function of frequency.
+#' 
 #' @return A \code{\link[ggplot2]{ggplot}} object.
+#' 
 #' @importFrom dplyr %>% rename
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_line scale_colour_manual theme_bw labs theme
 #' @importFrom ggplot2 scale_x_continuous scale_y_continuous labs
 #' @importFrom stats predict coef
+#' 
+#' @seealso \code{\link{env_stats}}, \code{\link{envpreddata}}.
+#' 
 #' @examples
 #' \dontrun{
 #' library(envPred)
 #' data(sst)
-#' dat <- predictability(sst$time_series,
-#'                       sst$dates,
-#'                       delta = 1,
-#'                       is_uneven = FALSE,
-#'                       interpolate = FALSE,
-#'                       show_warns = TRUE,
-#'                       noise_method = 'spectrum')
+#' dat <- env_stats(sst$time_series,
+#'                  sst$dates,
+#'                  n_states = 11,
+#'                  delta = 1,
+#'                  is_uneven = FALSE,
+#'                  interpolate = FALSE,
+#'                  show_warns = TRUE,
+#'                  noise_method = 'spectrum')
 #'
 #' gg_envpred(dat, type = "detrended")
 #' gg_envpred(dat, type = "spectral")
@@ -34,7 +41,9 @@ gg_envpred <- function(object, type = c("detrended", "spectral")) {
   if (missing(type)) {
     type <- "detrended"
   }
-
+  if (!is.envpreddata(object)) {
+    stop("Object is not of class envpreddata")
+  }
   switch(match.arg(type),
          "detrended" = {
            attr(object, "detrended_data") %>%
