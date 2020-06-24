@@ -21,8 +21,8 @@ status](https://ci.appveyor.com/api/projects/status/github/dbarneche/envPred?bra
 [![license](https://img.shields.io/badge/license-MIT%20+%20file%20LICENSE-lightgrey.svg)](https://choosealicense.com/)
 <!-- badges: end -->
 
-`envPred` is a package that calculates five “components” of
-environmental time series data: seasonality, the colour of environmental
+`envPred` is a package that calculates five statistics from
+environmental time-series data: seasonality, the colour of environmental
 noise (hereafter *colour*), constancy, contingency and predictability.
 
 Seasonality entails the regularity in the timing and magnitude of
@@ -38,19 +38,21 @@ Seasonality and colour are calculated following the steps described in
 [Barneche et
 al. (2018)](https://onlinelibrary.wiley.com/doi/abs/10.1111/geb.12748).
 We first remove linear trends by extracting the residuals from a linear
-regression model fitted to the raw time series. Seasonality is then
-estimated as the fraction of the total variance that is due to
-predictable seasonal periodicities, *a*/(*a* + *b*), where *a* is the
-variance of the seasonal trend, and *b* is the variance of the residual
-time series (i.e. the time series after the seasonal trend was removed).
-The seasonal trend is estimated by binning the time-series data into
-monthly intervals, averaging each month across the duration of the time
-series, then re-creating a seasonal time-series dataset on the same
-time-scale as the original data using a linear interpolation between the
-monthly midpoints. To calculate colour, we first calculate a residual
-time series by subtracting the corresponding seasonal value from each
-data point in the time series. The spectral density (i.e. variance in
-the residual time series) was assumed to scale with frequency, *f*,
+regression model fitted to the raw time series. Seasonality is estimated
+in two forms: 1) as the “unbounded” fraction of the total variance that
+is due to predictable seasonal periodicities, *α*/*β*, where *α* is the
+variance of the seasonal trend, and *β* is the variance of the residual
+time series (i.e. the time series after the seasonal trend was removed);
+or 2) as the “bounded” fraction of the total variance that is due to
+predictable seasonal periodicities, *α*/(*α* + *β*). The seasonal trend
+is estimated by binning the time-series data into monthly intervals,
+averaging each month across the duration of the time series, then
+re-creating a seasonal time-series dataset on the same time-scale as the
+original data using a linear interpolation between the monthly
+midpoints. To calculate colour, we first calculate a residual time
+series by subtracting the corresponding seasonal value from each data
+point in the time series. The spectral density (i.e. variance in the
+residual time series) was assumed to scale with frequency, *f*,
 according to an inverse power law, 1/*f*<sup>*θ*</sup> ([Halley & Kunin,
 1999](https://www.sciencedirect.com/science/article/pii/S0040580999914247);
 [Vasseur & Yodzis,
@@ -70,9 +72,14 @@ from the
 [lomb](https://www.rdocumentation.org/packages/lomb/versions/1.2) R
 package if the time series is unevenly distributed ([Glynn et
 al. 2006](https://academic.oup.com/bioinformatics/article/22/3/310/220284)).
+Spectral densities and therefore *θ* are calculated between the
+frequencies of 2/(*n**Δ**t*) and 1/(2*Δ**t*) (i.e. Nyquist frequency),
+where *Δ**t* is the time gap between consecutive points in the time
+series, and *n* is the number of observations in the time series.
 
 Constancy, contingency and predictability are calculated following
-[Colwell (1974)](https://onlinelibrary.wiley.com/doi/10.2307/1940366/).
+[Colwell
+(1974)](https://esajournals.onlinelibrary.wiley.com/doi/10.2307/1940366).
 Constancy measures the extent to which the environment is the same for
 all months in all years. Contingency measures the extent to which the
 environmental differences between months are the same in all years.
@@ -112,7 +119,7 @@ sample datasets were obtained from a random coordinate using the
 -   [Sea Surface Temperature
     (SST)](http://www.esrl.noaa.gov/psd/data/gridded/data.noaa.oisst.v2.highres.html)
 
-The package can be used for any time series data, e.g. temperature,
+The package can be used for any time-series data, e.g. temperature,
 rainfall, light intensity, etc.
 
 Authors
