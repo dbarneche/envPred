@@ -12,3 +12,4 @@
 ^tmp_dev\.R$
 ^tmp_logo_build\.R$
 ^manuscript$
+^output$
